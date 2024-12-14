@@ -1,0 +1,10 @@
+Start Screen
+Musik + Sounds
+Coins einsammeln
+Flaschen einsammeln
+Flaschen nur werfen, wenn sie vorhanden sind
+Collision
+Engegner besiegen
+Game-Over Screen
+Fullscreen (Canvas Fullscreen requestFullscreen)
+Erkärung (Welche Tasten)
