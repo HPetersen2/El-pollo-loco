@@ -2,6 +2,7 @@ class ThrowableObject extends MovableObject {
     speedY = 0;
     speedX = 0;
 
+    throw_sound = new Audio('audio/throw.mp3');
 
     constructor(x, y) {
         super().loadImage('../img/7_statusbars/3_icons/icon_salsa_bottle.png');
@@ -10,6 +11,7 @@ class ThrowableObject extends MovableObject {
         this.height = 60;
         this.width = 50;
         this.throw();
+        this.playSound();
     }
 
     animate() {
@@ -27,5 +29,9 @@ class ThrowableObject extends MovableObject {
         setInterval(() => {
             this.x += 10;
         }, 25);
+    }
+
+    playSound() {
+        this.throw_sound.play();
     }
 }

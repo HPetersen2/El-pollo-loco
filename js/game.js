@@ -6,8 +6,6 @@ function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 
-    console.log('My Character is', world.enemies);
-
 }
 
 window.addEventListener('keydown', (e) => {
@@ -58,3 +56,7 @@ window.addEventListener('keyup', (e) => {
         keyboard.D = false;
     }
 });
+
+function startFullscreen() {
+    canvas.requestFullscreen();
+}

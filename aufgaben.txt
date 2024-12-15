@@ -6,5 +6,5 @@ Flaschen nur werfen, wenn sie vorhanden sind
 Collision
 Engegner besiegen
 Game-Over Screen
-Fullscreen (Canvas Fullscreen requestFullscreen)
+Fullscreen (Canvas Fullscreen requestFullscreen) erl.
 Erkärung (Welche Tasten)

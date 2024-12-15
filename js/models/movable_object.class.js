@@ -42,6 +42,12 @@ class MovableObject extends DrawableObject{
         this.currentImage++;
     }
 
+    randomImage(images) {
+        let i = Math.round(Math.random() * images.length);
+        let path = images[i];
+        this.img = this.imageCache[path];
+    }
+
     isColliding(mo) {
         return this.x + this.width > mo.x &&  // Rechts kollidiert mit Links
                this.y + this.height > mo.y && // Oben kollidiert mit Unten
