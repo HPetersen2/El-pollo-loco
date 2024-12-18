@@ -1,5 +1,5 @@
 class World {
-    character = new Character()
+    character = new Character();
     level = level1;
     ctx;
     canvas;
@@ -51,6 +51,8 @@ class World {
 
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.throwableObjects);
         this.addToMap(this.character);
 

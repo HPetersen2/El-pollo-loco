@@ -43,7 +43,7 @@ class MovableObject extends DrawableObject{
     }
 
     randomImage(images) {
-        let i = Math.round(Math.random() * images.length);
+        let i = Math.floor(Math.random() * images.length);
         let path = images[i];
         this.img = this.imageCache[path];
     }
