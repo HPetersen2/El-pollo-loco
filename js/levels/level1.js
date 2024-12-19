@@ -36,11 +36,11 @@ let level1;
         new Bottle()
     ],
     [
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin()
+        new Coin(1),
+        new Coin(2),
+        new Coin(3),
+        new Coin(4),
+        new Coin(5)
     ]
 )
 

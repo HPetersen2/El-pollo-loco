@@ -34,7 +34,22 @@ class World {
             this.throwableObjects.push(bottle);
         }
     }
+
+    getCoinId(coin) {
+        if(coin instanceof Coin) {
+            return coin.getId();
+        }  else {
+            return null;
+        }
+    }
+
     checkCollisions() {
+        this.level.coins.forEach((coin) => {
+            if(this.character.isColliding(coin)) {
+                let id = this.getCoinId(coin);
+                this.character.collectingCoin(id);
+            }
+        })
         this.level.enemies.forEach((enemy) => {
             if(this.character.isColliding(enemy)) {
                 this.character.hit();
