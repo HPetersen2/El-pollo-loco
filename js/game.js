@@ -4,14 +4,19 @@ let keyboard = new Keyboard();
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    startGame(canvas);
+}
 
+function startGame() {
+    world = new World(canvas, keyboard);
+    checkOrientation();
 }
 
 window.addEventListener('keydown', (e) => {
     if(e.keyCode == 39) {
         keyboard.RIGHT = true;
     }
+
     if(e.keyCode == 37) {
         keyboard.LEFT = true;
     }
@@ -27,6 +32,7 @@ window.addEventListener('keydown', (e) => {
     if(e.keyCode == 32) {
         keyboard.SPACE = true;
     }
+
     if(e.keyCode == 68) {
         keyboard.D = true;
     }
@@ -52,6 +58,7 @@ window.addEventListener('keyup', (e) => {
     if(e.keyCode == 32) {
         keyboard.SPACE = false;
     }
+
     if(e.keyCode == 68) {
         keyboard.D = false;
     }
@@ -91,3 +98,14 @@ function toggleHelpContainer() {
     }
 }
 
+function checkOrientation() {
+    if (window.matchMedia("(orientation: landscape)").matches) {
+        if (window.innerHeight < 480) {
+            newHeight = window.innerHeight;
+            document.getElementById('canvas').style.height = `${newHeight}px`;
+        }
+    }
+    else {
+        document.getElementById('canvas').style.height = `100%`;
+    }
+}

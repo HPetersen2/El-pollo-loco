@@ -1,7 +1,7 @@
 Start Screen
 Musik + Sounds
-Coins einsammeln
-Flaschen einsammeln
+Coins einsammeln erl.
+Flaschen einsammeln erl.
 Flaschen nur werfen, wenn sie vorhanden sind
 Collision
 Engegner besiegen

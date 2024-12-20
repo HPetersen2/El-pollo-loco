@@ -7,6 +7,8 @@ class World {
     camera_x = 0;
     statusBar = new StatusBar();
     throwableObjects = [];
+    collecting_coin_sound = new Audio('./audio/coin.mp3');
+    collecting_bottle_sound = new Audio('./audio/bottle.mp3');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -44,12 +46,18 @@ class World {
     }
 
     checkCollisions() {
-        this.level.coins.forEach((coin) => {
+        this.level.coins.forEach((coin, index) => {
             if(this.character.isColliding(coin)) {
-                let id = this.getCoinId(coin);
-                this.character.collectingCoin(id);
+                this.level.coins.splice(index, 1);
+                this.playSound(this.collecting_coin_sound);
             }
-        })
+        });
+        this.level.bottles.forEach((bottle, index) => {
+            if(this.character.isColliding(bottle)) {
+                this.level.bottles.splice(index, 1);
+                this.playSound(this.collecting_bottle_sound);
+            }
+        });
         this.level.enemies.forEach((enemy) => {
             if(this.character.isColliding(enemy)) {
                 this.character.hit();
@@ -113,5 +121,9 @@ class World {
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
+    }
+
+    playSound(sound) {
+       sound.play();
     }
 }

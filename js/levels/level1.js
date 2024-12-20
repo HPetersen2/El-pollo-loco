@@ -1,9 +1,9 @@
 let level1;
 
     level1 = new Level([
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
+        // new Chicken(),
+        // new Chicken(),
+        // new Chicken(),
         new Endboss()
     ],
     [
@@ -33,14 +33,22 @@ let level1;
     ],
     [
         new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
         new Bottle()
     ],
     [
-        new Coin(1),
-        new Coin(2),
-        new Coin(3),
-        new Coin(4),
-        new Coin(5)
+        new Coin(),
+        new Coin(),
+        new Coin(),
+        new Coin(),
+        new Coin(),
+        new Coin(),
+        new Coin(),
+        new Coin(),
+        new Coin(),
+        new Coin()
     ]
 )
 

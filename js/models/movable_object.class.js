@@ -3,8 +3,8 @@ class MovableObject extends DrawableObject{
     otherDirection = false;
     speedY= 0;
     acceleration = 2.5;
+    currentX;
     energy = 100;
-    coinId;
     numberOfCoins = 0;
     lastHit = 0;
 
@@ -75,12 +75,5 @@ class MovableObject extends DrawableObject{
 
     isDead() {
         return this.energy == 0;
-    }
-
-    collectingCoin(id) {
-        this.coinId = id;
-        if(this.numberOfCoins >= 0 && this.numberOfCoins < 5) {
-            this.numberOfCoins++;
-        }
     }
 }
