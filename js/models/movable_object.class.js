@@ -6,6 +6,7 @@ class MovableObject extends DrawableObject{
     currentX;
     energy = 100;
     numberOfCoins = 0;
+    numberOfBottles = 0;
     lastHit = 0;
 
 
