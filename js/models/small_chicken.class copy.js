@@ -1,8 +1,8 @@
-class Chicken extends MovableObject {
+class SmallChicken extends MovableObject {
 
-    y = 390;
-    height = 60;
-    width = 80;
+    y = 410;
+    height = 40;
+    width = 50;
 
     offset = {
         top: 0,
@@ -10,15 +10,15 @@ class Chicken extends MovableObject {
         left: 0,
         right: 5
     };
-
+    
     IMAGES_WALKING = [
-        '../img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
-        '../img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
-        '../img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
+        '../img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
+        '../img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
+        '../img/3_enemies_chicken/chicken_small/1_walk/3_w.png'
     ];
 
     constructor() {
-        super().loadImage('../img/3_enemies_chicken/chicken_normal/1_walk/1_w.png')
+        super().loadImage('../img/3_enemies_chicken/chicken_small/1_walk/1_w.png')
         this.loadImages(this.IMAGES_WALKING);
 
         this.x = 300 + Math.random() * 600;

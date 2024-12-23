@@ -53,10 +53,10 @@ class MovableObject extends DrawableObject{
     }
 
     isColliding(mo) {
-        return this.x + this.width > mo.x &&  // Rechts kollidiert mit Links
-               this.y + this.height > mo.y && // Oben kollidiert mit Unten
-               this.x < mo.x + mo.width &&    // Links kollidiert mit Rechts
-               this.y < mo.y + mo.height;     // Unten kollidiert mit Oben
+        return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&  // Rechts kollidiert mit Links
+               this.y + this.height - this.offset.bottom > mo.y + mo.offset.top && // Oben kollidiert mit Unten
+               this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&    // Links kollidiert mit Rechts
+               this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;     // Unten kollidiert mit Oben
     }
 
     hit() {
