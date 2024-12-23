@@ -53,7 +53,7 @@ h3 {
 
 @media (orientation: portrait) and (max-width: 720px){
     canvas {
-        display: none;
+        display: flex;
     }
     .turn-device-container {
         display: flex;
@@ -66,6 +66,11 @@ h3 {
     canvas {
         width: 100%;
     }
+    /* .mobile-button-container-top {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+    } */
     h1 {
         display: none;
     }
@@ -75,6 +80,49 @@ h3 {
     canvas {
         height: 100vh;
     }
+}
+
+.canvas-container {
+    position: relative;
+    width: 720px;
+    height: 480px;
+}
+
+.mobile-button-container-top {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.mobile-button-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: yellow;
+    height: 50px;
+    width: 50px;
+}
+
+.mobile-button-icon img {
+    width: 100%;
+    height: 100%;
+}
+
+.mobile-button-container-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    margin: 0;
+    width: 100%;
 }
 
 #fullscreen-container {
