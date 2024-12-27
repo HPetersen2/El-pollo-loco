@@ -2,6 +2,7 @@ class Character extends MovableObject {
 
     currentX;
     sleepTimeout;
+    dead = false;
 
     height = 300;
     y = 100;
@@ -79,21 +80,21 @@ class Character extends MovableObject {
 
         setInterval(() => {
             this.walking_sound.pause();
-            if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && this.dead == false) {
                 this.moveRight();
                 this.otherDirection = false;
                 this.walking_sound.play();
                 this.currentX = this.x;
                 this.isSleeping(this.x, this.IMAGES_SLEEP);
             }
-            if(this.world.keyboard.LEFT && this.x > 0) {
+            if(this.world.keyboard.LEFT && this.x > 0 && this.dead == false) {
                 this.otherDirection = true;
                 this.moveLeft();
                 this.walking_sound.play();
                 this.currentX = this.x;
                 this.isSleeping(this.x, this.IMAGES_SLEEP);
             }
-            if(this.world.keyboard.SPACE && !this.isAboveGround()) {
+            if(this.world.keyboard.SPACE && !this.isAboveGround() && this.dead == false) {
                 this.jump();
             }
             this.world.camera_x = -this.x + 100;
@@ -102,6 +103,7 @@ class Character extends MovableObject {
         setInterval(() => {
             if(this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                this.dead = true;
             }
             else if(this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);

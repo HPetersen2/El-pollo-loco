@@ -51,14 +51,15 @@ h3 {
     height: 328px;
 }
 
-@media (orientation: portrait) and (max-width: 720px){
+@media (orientation: portrait) and (max-width: 667px){
     canvas {
-        display: flex;
+        display: none;
     }
     .turn-device-container {
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
     }
 }
 
@@ -74,11 +75,11 @@ h3 {
     h1 {
         display: none;
     }
-}
-
-@media only screen and (max-height: 430px) {
-    canvas {
-        height: 100vh;
+    
+    .mobile-button-container-top {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
     }
 }
 
@@ -89,9 +90,7 @@ h3 {
 }
 
 .mobile-button-container-top {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
+    display: none;
     position: absolute;
     top: 10px;
     left: 0;
@@ -123,6 +122,16 @@ h3 {
     left: 0;
     margin: 0;
     width: 100%;
+}
+
+.mobile-button-container-bottom-left {
+    display: flex;
+    gap: 8px;
+}
+
+.mobile-button-container-bottom-right {
+    display: flex;
+    gap: 8px;
 }
 
 #fullscreen-container {

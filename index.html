@@ -9,7 +9,7 @@
     <script src="js/models/movable_object.class.js"></script>
     <script src="js/models/character.class.js"></script>
     <script src="js/models/chicken.class.js"></script>
-    <script src="js/models/small_chicken.class copy.js"></script>
+    <script src="js/models/small_chicken.class.js"></script>
     <script src="js/models/cloud.class.js"></script>
     <script src="js/models/world.class.js"></script>
     <script src="js/models/coin.class.js"></script>
@@ -47,21 +47,24 @@
             </canvas>
             <div class="mobile-button-container-bottom">
                 <div class="mobile-button-container-bottom-left">
-                    <div class="mobile-button-icon">
+                    <div class="mobile-button-icon" id="Btnleft">
                         <img src="./img/icons/arrow-left-circle.svg" alt="left">
                     </div>
-                    <div class="mobile-button-icon">
+                    <div class="mobile-button-icon" id="Btnright">
                         <img src="./img/icons/arrow-right-circle.svg" alt="right">
                     </div>
                 </div>
                 <div class="mobile-button-container-bottom-right">
-                    <div class="mobile-button-icon">
+                    <div class="mobile-button-icon" id="Btnup">
                         <img src="./img/icons/arrow-up-circle.svg" alt="up">
+                    </div>
+                    <div class="mobile-button-icon" id="Btnthrow">
+                        <img src="./img/icons/heart-arrow.svg" alt="throw">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="menu">
+        <!-- <div class="menu">
             <div class="help" onclick="toggleHelpContainer()">
                 <p>Help</p>
                 <img src="./img/icons/question.png" alt="question">
@@ -83,7 +86,7 @@
                         <strong>Throw Bottle:</strong> Press <kbd style="border: 1px solid #ccc; padding: 0.2em 0.4em; border-radius: 3px;">D</kbd>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>  
     <footer>
         <a target="_blank" href="./legal_notice.html">Impressum & Datenschutz</a>

@@ -9,6 +9,7 @@ class World {
     statusBarCoins = new StatusBarCoins();
     statusBarBottles = new StatusBarBottles();
     throwableObjects = [];
+    bottles = 0;
     collecting_coin_sound = new Audio('./audio/coin.mp3');
     collecting_bottle_sound = new Audio('./audio/bottle.mp3');
 
@@ -33,17 +34,9 @@ class World {
     }
 
     checkThrowObjects() {
-        if(this.keyboard.D) {
+        if(this.keyboard.D && this.bottles > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.numberOfBottles)
             this.throwableObjects.push(bottle);
-        }
-    }
-
-    getCoinId(coin) {
-        if(coin instanceof Coin) {
-            return coin.getId();
-        }  else {
-            return null;
         }
     }
 
@@ -59,6 +52,7 @@ class World {
         this.level.bottles.forEach((bottle, index) => {
             if(this.character.isColliding(bottle)) {
                 this.level.bottles.splice(index, 1);
+                this.bottles++
                 this.playSound(this.collecting_bottle_sound);
                 this.character.numberOfBottles++;
                 this.statusBarBottles.setPercentage(this.character.numberOfBottles);
