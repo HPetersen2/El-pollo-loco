@@ -50,6 +50,7 @@ class World {
                 this.statusBarCoins.setPercentage(this.character.numberOfCoins);
             }
         });
+
         this.level.bottles.forEach((bottle, index) => {
             if(this.character.isColliding(bottle)) {
                 this.level.bottles.splice(index, 1);
@@ -59,10 +60,17 @@ class World {
                 this.statusBarBottles.setPercentage(this.character.numberOfBottles);
             }
         });
+
         this.level.enemies.forEach((enemy) => {
             if(this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
+            }
+        });
+
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isCollidingTopWithBottom(enemy)) {
+                console.log('geht')
             }
         });
     }

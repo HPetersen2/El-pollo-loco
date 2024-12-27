@@ -60,6 +60,15 @@ class MovableObject extends DrawableObject{
                this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;     // Unten kollidiert mit Oben
     }
 
+    isCollidingTopWithBottom(mo) {
+        return (
+            this.y + this.offset.top <= mo.y + mo.height - mo.offset.bottom && // Oberseite von this trifft Unterseite von mo
+            this.y + this.height - this.offset.bottom > mo.y + mo.offset.top && // Unterseite von this ist unter der Oberseite von mo
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right && // Horizontaler Überlappungsbereich (Links von this mit Rechts von mo)
+            this.x + this.width - this.offset.right > mo.x + mo.offset.left // Horizontaler Überlappungsbereich (Rechts von this mit Links von mo)
+        );
+    }
+
     hit() {
         this.energy -= 5;
         if(this.energy < 0) {
@@ -75,7 +84,7 @@ class MovableObject extends DrawableObject{
         return timepassed < 1;
     }
 
-    isDead() {
-        return this.energy == 0;
+    isDead(energy) {
+        return energy == 0;
     }
 }
