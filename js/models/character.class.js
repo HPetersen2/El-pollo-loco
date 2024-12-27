@@ -64,6 +64,7 @@ class Character extends MovableObject {
     ];
     world;
     walking_sound = new Audio('audio/running.mp3');
+    sleeping_sound = new Audio('audio/sleep.mp3');
 
     constructor() {
         super().loadImage('../img/2_character_pepe/1_idle/idle/I-1.png');
@@ -127,6 +128,7 @@ class Character extends MovableObject {
         setTimeout(() => {
             if(this.currentX == x) {
                 this.playAnimation(images);
+                this.sleeping_sound.play();
             }
         }, 15000);
     }
