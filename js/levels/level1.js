@@ -12,7 +12,7 @@ function startGame() {
         // new SmallChicken(),
         // new SmallChicken(),
         // new SmallChicken(),
-        // new SmallChicken()
+        new SmallChicken()
     ],
     [
         new Cloud(500),
