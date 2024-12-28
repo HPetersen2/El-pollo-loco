@@ -31,6 +31,10 @@ class World {
             this.checkCollisions();
             this.checkThrowObjects();
         }, 200);
+
+        setInterval(() => {
+            this.checkCollisionEnemies();
+        }, 25);
     }
 
     checkThrowObjects() {
@@ -65,12 +69,16 @@ class World {
             if(this.character.isColliding(enemy) && enemy.energy > 0) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
-                if(this.character.isCollidingTop(enemy) && this.character.speedY > 0) {
-                    enemy.energy = 0;
-                }
             }
         });
+    }
 
+    checkCollisionEnemies() {
+        this.level.enemies.forEach((enemy) => {
+        if(this.character.isColliding(enemy) && this.character.speedY > 0) {
+            enemy.energy = 0;
+        }
+        });
     }
 
     // Draw() wird immer wieder aufgerufen

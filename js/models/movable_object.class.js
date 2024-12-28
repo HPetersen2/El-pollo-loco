@@ -60,10 +60,6 @@ class MovableObject extends DrawableObject{
                this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;     // Unten kollidiert mit Oben
     }
 
-    isCollidingTop(mo) {
-        return this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
-    }
-
     hit() {
         this.energy -= 5;
         if(this.energy < 0) {
