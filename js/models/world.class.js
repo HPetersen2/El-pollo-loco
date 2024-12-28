@@ -62,17 +62,15 @@ class World {
         });
 
         this.level.enemies.forEach((enemy) => {
-            if(this.character.isColliding(enemy)) {
+            if(this.character.isColliding(enemy) && enemy.energy > 0) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
+                if(this.character.isCollidingTop(enemy) && this.character.speedY > 0) {
+                    enemy.energy = 0;
+                }
             }
         });
 
-        this.level.enemies.forEach((enemy) => {
-            if (this.character.isCollidingTopWithBottom(enemy)) {
-                console.log('geht')
-            }
-        });
     }
 
     // Draw() wird immer wieder aufgerufen

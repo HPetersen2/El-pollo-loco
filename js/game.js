@@ -4,13 +4,12 @@ let keyboard = new Keyboard();
 
 function init() {
     canvas = document.getElementById('canvas');
-    startGame(canvas);
-}
-
-function startGame() {
+    startGame();
     world = new World(canvas, keyboard);
     checkOrientation();
 }
+
+
 
 function startFullscreen() {
     let fullscreen = document.getElementById('fullscreen-container');
