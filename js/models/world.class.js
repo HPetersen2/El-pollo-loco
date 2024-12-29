@@ -9,7 +9,8 @@ class World {
     statusBarCoins = new StatusBarCoins();
     statusBarBottles = new StatusBarBottles();
     throwableObjects = [];
-    bottles = 0;
+    playSounds = true;
+    game_sound = new Audio('./audio/el_pollo_loco.mp3');
     collecting_coin_sound = new Audio('./audio/coin.mp3');
     collecting_bottle_sound = new Audio('./audio/bottle.mp3');
 
@@ -38,8 +39,9 @@ class World {
     }
 
     checkThrowObjects() {
-        if(this.keyboard.D && this.bottles > 0) {
-            this.bottles--;
+        if(this.keyboard.D && this.character.numberOfBottles > 0 && this.character.otherDirection == false) {
+            this.character.numberOfBottles--;
+            this.statusBarBottles.setPercentage(this.character.numberOfBottles);
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.numberOfBottles)
             this.throwableObjects.push(bottle);
         }
@@ -75,7 +77,8 @@ class World {
 
     checkCollisionEnemies() {
         this.level.enemies.forEach((enemy) => {
-        if(this.character.isColliding(enemy) && this.character.speedY > 0) {
+            console.log(this.character.y)
+        if(this.character.isColliding(enemy) && this.character.y != 190) {
             enemy.energy = 0;
         }
         });

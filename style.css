@@ -46,9 +46,19 @@ h3 {
     display: none;
 }
 
-.turn-device-container img {
+.image-turn-device {
     width: 328px;
-    height: 328px;
+    height: 329px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(90deg);
+    }
+    to {
+        transform: rotate(00deg);
+    }
 }
 
 @media (orientation: portrait) and (max-width: 667px){
@@ -67,11 +77,11 @@ h3 {
     canvas {
         width: 100%;
     }
-    /* .mobile-button-container-top {
+    .mobile-button-container-top {
         display: flex;
         justify-content: flex-end;
         gap: 8px;
-    } */
+    }
     h1 {
         display: none;
     }
@@ -138,7 +148,6 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-grow: 1;
 }
 
 .menu {

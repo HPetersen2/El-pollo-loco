@@ -9,8 +9,6 @@ function init() {
     checkOrientation();
 }
 
-
-
 function startFullscreen() {
     let fullscreen = document.getElementById('fullscreen-container');
     enterFullscreen(fullscreen);
