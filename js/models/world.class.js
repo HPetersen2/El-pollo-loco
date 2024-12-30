@@ -39,10 +39,10 @@ class World {
     }
 
     checkThrowObjects() {
-        if(this.keyboard.D && this.character.numberOfBottles > 0 && this.character.otherDirection == false) {
+        if(this.keyboard.D && this.character.numberOfBottles > 0 && !this.character.otherDirection) {
             this.character.numberOfBottles--;
             this.statusBarBottles.setPercentage(this.character.numberOfBottles);
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.numberOfBottles)
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.numberOfBottles, this.playSounds)
             this.throwableObjects.push(bottle);
         }
     }
@@ -77,7 +77,6 @@ class World {
 
     checkCollisionEnemies() {
         this.level.enemies.forEach((enemy) => {
-            console.log(this.character.y)
         if(this.character.isColliding(enemy) && this.character.y != 190) {
             enemy.energy = 0;
         }
@@ -126,6 +125,7 @@ class World {
         mo.draw(this.ctx);
         mo.drawFrame(this.ctx);
 
+
         if(mo.otherDirection) {
             this.flipImageBack(mo);
         }
@@ -144,6 +144,20 @@ class World {
     }
 
     playSound(sound) {
-       sound.play();
+        if(this.playSounds) {
+            sound.play();
+        }
     }
+
+    muteAllSounds() {
+        let refMuteIcon = document.getElementById('mute')
+        if(refMuteIcon.getAttribute("src") == './img/icons/volume-up.svg') {
+            refMuteIcon.setAttribute("src", "./img/icons/volume-mute.svg");
+            this.playSounds = false;
+        } else if(refMuteIcon.getAttribute("src") == './img/icons/volume-mute.svg') {
+            refMuteIcon.setAttribute("src", "./img/icons/volume-up.svg");
+            this.playSounds = true;
+        }
+    }
+
 }

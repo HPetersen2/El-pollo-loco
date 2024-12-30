@@ -26,7 +26,6 @@ body {
 
 canvas {
     background-color: black;
-    display: block;
 }
 
 h1 {
@@ -61,8 +60,8 @@ h3 {
     }
 }
 
-@media (orientation: portrait) and (max-width: 667px){
-    canvas {
+@media (orientation: portrait) and (max-width: 932px){
+    .canvas-container {
         display: none;
     }
     .turn-device-container {
@@ -74,7 +73,8 @@ h3 {
 }
 
 @media only screen and (max-width: 932px) {
-    canvas {
+    .canvas-container {
+        position: absolute;
         width: 100%;
     }
     .mobile-button-container-top {
@@ -94,13 +94,14 @@ h3 {
 }
 
 .canvas-container {
+    display: block;
     position: relative;
     width: 720px;
     height: 480px;
 }
 
 .mobile-button-container-top {
-    display: none;
+    display: flex;
     position: absolute;
     top: 10px;
     left: 0;

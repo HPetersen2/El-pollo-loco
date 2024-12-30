@@ -6,7 +6,7 @@ function startGame() {
         new Chicken(),
         // new Chicken(),
         // new Chicken(),
-        // new Endboss(),
+        new Endboss(),
         // new SmallChicken(),
         // new SmallChicken(),
         // new SmallChicken(),

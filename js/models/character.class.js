@@ -81,21 +81,21 @@ class Character extends MovableObject {
 
         setInterval(() => {
             this.walking_sound.pause();
-            if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && this.dead == false) {
+            if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.dead) {
                 this.moveRight();
                 this.otherDirection = false;
-                this.walking_sound.play();
+                this.world.playSound(this.walking_sound);
                 this.currentX = this.x;
                 this.isSleeping(this.x, this.IMAGES_SLEEP);
             }
-            if(this.world.keyboard.LEFT && this.x > 0 && this.dead == false) {
+            if(this.world.keyboard.LEFT && this.x > 0 && !this.dead) {
                 this.otherDirection = true;
                 this.moveLeft();
-                this.walking_sound.play();
+                this.world.playSound(this.walking_sound);
                 this.currentX = this.x;
                 this.isSleeping(this.x, this.IMAGES_SLEEP);
             }
-            if(this.world.keyboard.SPACE && !this.isAboveGround() && this.dead == false) {
+            if(this.world.keyboard.SPACE && !this.isAboveGround() && !this.dead) {
                 this.jump();
             }
             this.world.camera_x = -this.x + 100;
@@ -117,7 +117,7 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
-        }, 50);
+        }, 100);
     }
 
     jump() {
@@ -128,7 +128,7 @@ class Character extends MovableObject {
         setTimeout(() => {
             if(this.currentX == x) {
                 this.playAnimation(images);
-                this.sleeping_sound.play();
+                this.world.playSound(this.sleeping_sound);
             }
         }, 15000);
     }
