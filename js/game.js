@@ -1,17 +1,51 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let isGameStarted = false;
 
 function init() {
     canvas = document.getElementById('canvas');
-    startGame();
-    world = new World(canvas, keyboard);
+    startScreen = document.getElementById('start-screen');
+    gameCondition(canvas, startScreen);
     checkOrientation();
+}
+
+function gameCondition(canvas, startScreen) {
+    let mobileButtonsTop = document.getElementById('mobile-buttons-top')
+    let mobileButtonsBottom = document.getElementById('mobile-buttons-bottom')
+    if(isGameStarted) {
+        canvas.style.display = 'block';
+        startScreen.style.display = 'none';
+        startLevel1();
+        mobileButtonsTop.style.display = 'flex';
+        mobileButtonsBottom.style.display = 'flex';
+        world = new World(canvas, keyboard);
+    } else if(!isGameStarted) {
+        clearAllIntervals();
+        canvas.style.display = 'none';
+        startScreen.style.display = 'flex';
+        mobileButtonsTop.style.display = 'none';
+        mobileButtonsBottom.style.display = 'none';
+    }
+}
+
+function startGame() {
+    isGameStarted = true;
+    init();
+}
+
+function endGame() {
+    isGameStarted = false;
+    init();
 }
 
 function startFullscreen() {
     let fullscreen = document.getElementById('fullscreen-container');
     enterFullscreen(fullscreen);
+}
+
+function clearAllIntervals() {
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
 function enterFullscreen(element) {

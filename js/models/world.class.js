@@ -10,9 +10,11 @@ class World {
     statusBarBottles = new StatusBarBottles();
     throwableObjects = [];
     playSounds = true;
-    game_sound = new Audio('./audio/el_pollo_loco.mp3');
-    collecting_coin_sound = new Audio('./audio/coin.mp3');
+    // game_sound = new Audio('./audio/el_pollo_loco.mp3');
+    collecting_coin_sound = new Audio('./audio/collect.mp3');
     collecting_bottle_sound = new Audio('./audio/bottle.mp3');
+    hurt_sound = new Audio('./audio/hurt.mp3');
+    dead_chicken_sound = new Audio('./audio/chicken-dead.mp3');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -21,6 +23,7 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+        // this.playGameSound(this.game_sound);
     }
 
     setWorld() {
@@ -69,6 +72,7 @@ class World {
 
         this.level.enemies.forEach((enemy) => {
             if(this.character.isColliding(enemy) && enemy.energy > 0) {
+                this.playSound(this.hurt_sound);
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
             }
@@ -76,10 +80,12 @@ class World {
     }
 
     checkCollisionEnemies() {
-        this.level.enemies.forEach((enemy) => {
-        if(this.character.isColliding(enemy) && this.character.y != 190) {
-            enemy.energy = 0;
-        }
+        this.level.enemies.forEach((enemy, index) => {
+            if(this.character.isColliding(enemy) && this.character.y != 190) {
+                this.playSound(this.dead_chicken_sound);
+                enemy.energy = 0;
+                setTimeout(() => this.level.enemies.splice(index, 1), 1000)
+            }
         });
     }
 
@@ -144,6 +150,12 @@ class World {
     }
 
     playSound(sound) {
+        if(this.playSounds) {
+            sound.play();
+        }
+    }
+
+    playGameSound(sound) {
         if(this.playSounds) {
             sound.play();
         }

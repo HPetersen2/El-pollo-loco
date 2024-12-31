@@ -33,8 +33,8 @@
             <h2>Please turn your device!</h2>
             <img  class="image-turn-device" src="./img/icons/Rotate_mobile_rotate_smartphone_phone.png" alt="turn-your-device">
         </div>
-        <div class="canvas-container">
-            <div class="mobile-button-container-top">
+        <div class="canvas-container" id="canvas-container">
+            <div class="mobile-button-container-top" id="mobile-buttons-top">
                 <div class="mobile-button-icon">
                     <img src="./img/icons/play-circle.svg" alt="play">
                 </div>
@@ -42,10 +42,23 @@
                     <img id="mute" src="./img/icons/volume-up.svg" alt="mute">
                 </div>
             </div>
+            <div class="screen-container" id="start-screen">
+                <div class="button-container">
+                    <div class="start-screen-button" onclick="startGame()">
+                        Start
+                    </div>
+                    <div class="start-screen-button">
+                        Help
+                    </div>
+                </div>
+                <!-- <div>
+                    <a target="_blank" href="./legal_notice.html">Impressum & Datenschutz</a>
+                </div> -->
+            </div>
             <canvas width="720px" height="480px" id="canvas">
 
             </canvas>
-            <div class="mobile-button-container-bottom">
+            <div class="mobile-button-container-bottom" id="mobile-buttons-bottom">
                 <div class="mobile-button-container-bottom-left">
                     <div class="mobile-button-icon" id="Btnleft">
                         <img src="./img/icons/arrow-left-circle.svg" alt="left">
@@ -88,8 +101,5 @@
                 </div>
             </div>
         </div> --> 
-    <!-- <footer>
-        <a target="_blank" href="./legal_notice.html">Impressum & Datenschutz</a>
-    </footer>   -->
 </body>
 </html>
