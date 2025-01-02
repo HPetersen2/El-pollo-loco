@@ -1,7 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let isGameStarted = false;
+let isGameStarted = true;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -19,7 +19,7 @@ function gameCondition(canvas, startScreen) {
         startLevel1();
         mobileButtonsTop.style.display = 'flex';
         mobileButtonsBottom.style.display = 'flex';
-        world = new World(canvas, keyboard);
+        world = new World(canvas, keyboard, isGameStarted);
     } else if(!isGameStarted) {
         clearAllIntervals();
         canvas.style.display = 'none';
@@ -32,6 +32,17 @@ function gameCondition(canvas, startScreen) {
 function startGame() {
     isGameStarted = true;
     init();
+}
+
+function toggleOverlay() {
+    let refOverlay = document.getElementById('overlay');
+    let currentStyle = window.getComputedStyle(refOverlay).display;
+
+    if(currentStyle == 'none') {
+        refOverlay.style.display = 'flex'
+    } else if(currentStyle == 'flex') {
+        refOverlay.style.display = 'none'
+    }
 }
 
 function endGame() {
@@ -63,17 +74,6 @@ function exitFullscreen(element) {
         document.exitFullscreen();
     } else if(document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
-    }
-}
-
-function toggleHelpContainer() {
-    let refHelpContainer = document.getElementById('information-container');
-    let currentStyle = window.getComputedStyle(refHelpContainer).display;
-    
-    if(currentStyle == 'none') {
-        refHelpContainer.style.display = 'flex'
-    } else if(currentStyle == 'flex') {
-        refHelpContainer.style.display = 'none'
     }
 }
 

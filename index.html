@@ -20,6 +20,7 @@
     <script src="js/models/endboss.class.js"></script>
     <script src="js/models/throwable_object.class.js"></script>
     <script src="js/models/status-bar.class.js"></script>
+    <script src="js/models/status-bar-endboss.class.js"></script>
     <script src="js/models/status-bar-coins.class.js"></script>
     <script src="js/models/status-bar-bottles.class.js"></script>
     <script src="js/levels/level1.js"></script>
@@ -48,7 +49,7 @@
                         <div class="start-screen-button" onclick="startGame()">
                             Start
                         </div>
-                        <div class="start-screen-button">
+                        <div class="start-screen-button" id="help-button" onclick="toggleOverlay()">
                             Help
                         </div>
                     </div>
@@ -81,28 +82,25 @@
             </div>
         </div>
     </div> 
-        <!-- <div class="menu">
-            <div class="help" onclick="toggleHelpContainer()">
-                <p>Help</p>
-                <img src="./img/icons/question.png" alt="question">
-            </div>
-            <div class="control">
+
+
+            <!-- <div class="control">
                 <img onclick="startFullscreen()" src="./img/icons/fullscreen.png" alt="fullscreen">
+            </div> -->
+
+
+     <div id="overlay" class="overlay">
+        <div class="overlay-content">
+            <div class="overlay-header">
+                <h2>Spielanleitung</h2>
+                <button class="close-btn" id="closeOverlay" onclick="toggleOverlay()">&times;</button>
+            </div>
+            <div class="instructions">
+                <p><span>&#8592;</span> und <span>&#8594;</span>: Bewegung nach links und rechts</p>
+                <p><span>D</span>: Werfen</p>
+                <p><span>Leertaste</span>: Springen</p>
             </div>
         </div>
-        <div id="information-container">
-            <div onclick="toggleHelpContainer()">
-                <img src="./img/icons/close.png" alt="close">
-            </div>
-            <div>
-                <h3>Help Dialog</h3>
-                <div>
-                        <strong>Move Left:</strong> Press <span>⬅️</span>
-                        <strong>Move Right:</strong> Press <span>➡️</span>
-                        <strong>Jump:</strong> Press <kbd style="border: 1px solid #ccc; padding: 0.2em 0.4em; border-radius: 3px;">Spacebar</kbd>
-                        <strong>Throw Bottle:</strong> Press <kbd style="border: 1px solid #ccc; padding: 0.2em 0.4em; border-radius: 3px;">D</kbd>
-                </div>
-            </div>
-        </div> --> 
+     </div>   
 </body>
 </html>

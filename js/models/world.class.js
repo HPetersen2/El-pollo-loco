@@ -6,24 +6,26 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    statusBarEndboss = new StatusBarEndboss();
     statusBarCoins = new StatusBarCoins();
     statusBarBottles = new StatusBarBottles();
     throwableObjects = [];
-    playSounds = true;
-    // game_sound = new Audio('./audio/el_pollo_loco.mp3');
+    playSounds = false;
+    game_sound = new Audio('./audio/el_pollo_loco.mp3');
     collecting_coin_sound = new Audio('./audio/collect.mp3');
     collecting_bottle_sound = new Audio('./audio/bottle.mp3');
     hurt_sound = new Audio('./audio/hurt.mp3');
     dead_chicken_sound = new Audio('./audio/chicken-dead.mp3');
+    isGameStarted;
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, isGameStarted) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.isGameStarted = isGameStarted;
         this.draw();
         this.setWorld();
         this.run();
-        // this.playGameSound(this.game_sound);
     }
 
     setWorld() {
@@ -77,6 +79,22 @@ class World {
                 this.statusBar.setPercentage(this.character.energy);
             }
         });
+        
+        this.throwableObjects.forEach((bottle) => {
+            this.level.enemies.forEach((enemy) => {
+                if(bottle.isColliding(enemy) && enemy.energy > 0) {
+                    this.playSound(this.hurt_sound);
+                    console.log(enemy.constructor.name)
+                    if(enemy.constructor.name == 'Chicken' || enemy.constructor.name == 'SmallChicken') {
+                        enemy.energy = 0;
+                    } else if(enemy.constructor.name == 'Endboss') {
+                        enemy.energy -= 10;
+                        this.statusBarEndboss.setPercentage(enemy.energy);
+                        console.log(enemy.energy) 
+                    }
+                }
+            })
+        });
     }
 
     checkCollisionEnemies() {
@@ -84,7 +102,7 @@ class World {
             if(this.character.isColliding(enemy) && this.character.y != 190) {
                 this.playSound(this.dead_chicken_sound);
                 enemy.energy = 0;
-                setTimeout(() => this.level.enemies.splice(index, 1), 1000)
+                // setTimeout(() => this.level.enemies.splice(index, 1), 1000)
             }
         });
     }
@@ -104,6 +122,7 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0); // Back
         this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarEndboss);
         this.addToMap(this.statusBarCoins);
         this.addToMap(this.statusBarBottles);
         this.ctx.translate(this.camera_x, 0); // Forwards
@@ -155,8 +174,8 @@ class World {
         }
     }
 
-    playGameSound(sound) {
-        if(this.playSounds) {
+    playGameSound(sound, isGameStarted) {
+        if(this.playSounds && isGameStarted) {
             sound.play();
         }
     }

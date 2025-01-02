@@ -5,6 +5,13 @@ class ThrowableObject extends MovableObject {
     playSounds;
     throw_sound = new Audio('audio/throw.mp3');
 
+    offset = {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
+    };
+
     constructor(x, y, numberOfBottles, playSounds) {
         super().loadImage('../img/7_statusbars/3_icons/icon_salsa_bottle.png');
         this.x = x;
