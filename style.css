@@ -36,11 +36,11 @@ h1 {
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
-h3 {
+h2 {
     margin: 0;
-    font-size: 32px;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); 
+    font-size: 36px;
+    letter-spacing: 4px;
+    text-align: center;
 }
 
 .turn-device-container {
@@ -62,17 +62,48 @@ h3 {
     }
 }
 
+@media (max-width: 932px) and (orientation: portrait) {
+    .turn-device-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    canvas {
+        display: none !important;
+    }
+
+    .canvas-container {
+        display: none !important;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    .screen-container {
+        display: none;
+    }
+
+    .endscreen-container {
+        display: none !important;
+    }
+}
 
 /* Querformat bei schmalen Bildschirmen */
-@media (max-width: 932px) {
+@media (max-width: 932px) and (orientation: landscape) {
+    #fullscreen-container {
+        min-height: 100vh;
+    }
+
     .turn-device-container {
         display: none; /* Verstecke den Hinweis */
     }
 
     .canvas-container {
-        display: block; /* Zeige den Canvas */
+        display: flex; /* Zeige den Canvas */
         position: absolute;
-        width: 100%;
     }
 
     h1 {
@@ -147,6 +178,23 @@ h3 {
     font-size: 24px;
 }
 
+.endscreen-container {
+    display: none;
+    background-image: url('./img/5_background/first_half_background.png');
+    z-index: 1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+#result-picture {
+    width: 100%;
+    height: 100%;
+}
+
 .canvas-container {
     display: block;
     position: relative;
@@ -206,6 +254,7 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .overlay {

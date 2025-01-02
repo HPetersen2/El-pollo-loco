@@ -83,14 +83,14 @@ class World {
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
                 if(bottle.isColliding(enemy) && enemy.energy > 0) {
-                    this.playSound(this.hurt_sound);
+                    this.playSound(this.dead_chicken_sound);
                     console.log(enemy.constructor.name)
                     if(enemy.constructor.name == 'Chicken' || enemy.constructor.name == 'SmallChicken') {
                         enemy.energy = 0;
                     } else if(enemy.constructor.name == 'Endboss') {
-                        enemy.energy -= 10;
+                        enemy.energy -= 20;
                         this.statusBarEndboss.setPercentage(enemy.energy);
-                        console.log(enemy.energy) 
+                        enemy.playHurtAnimation();
                     }
                 }
             })
@@ -99,7 +99,7 @@ class World {
 
     checkCollisionEnemies() {
         this.level.enemies.forEach((enemy, index) => {
-            if(this.character.isColliding(enemy) && this.character.y != 190) {
+            if(this.character.isColliding(enemy) && this.character.y != 190 && enemy.constructor.name != 'Endboss') {
                 this.playSound(this.dead_chicken_sound);
                 enemy.energy = 0;
                 // setTimeout(() => this.level.enemies.splice(index, 1), 1000)

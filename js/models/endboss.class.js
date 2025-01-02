@@ -1,5 +1,6 @@
 class Endboss extends MovableObject {
 
+    hit_sound = new Audio('./audio/chicken-dead.mp3')
     height = 400;
     width = 250;
     y = 60;
@@ -48,19 +49,35 @@ class Endboss extends MovableObject {
         '../img/4_enemie_boss_chicken/4_hurt/G23.png'
     ];
 
+    IMAGES_DEAD = [
+        '../img/4_enemie_boss_chicken/5_dead/G24.png',
+        '../img/4_enemie_boss_chicken/5_dead/G25.png',
+        '../img/4_enemie_boss_chicken/5_dead/G26.png'
+    ];
+
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.x = 2000;
         this.animate();
     }
 
     animate() {
+
         setInterval(() => {
-            this.playAnimation(this.IMAGES_ALERT);
+            if(this.energy == 100) {
+                this.playAnimation(this.IMAGES_ALERT)
+            }
+            if(this.energy < 100) {
+                this.playAnimation(this.IMAGES_ATTACK);
+            }
+            if(this.energy == 0) {
+                this.playAnimation(this.IMAGES_DEAD);
+            }
         }, 200);
     
 
@@ -81,5 +98,9 @@ class Endboss extends MovableObject {
 
     live() {
         return this.energy < 100 && this.energy > 0;
+    }
+
+    playHurtAnimation() {
+        this.playAnimation(this.IMAGES_HURT);
     }
 }

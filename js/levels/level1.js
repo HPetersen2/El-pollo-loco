@@ -1,18 +1,23 @@
 let level1;
 
-function startLevel1() {
+function start(level) {
+    if(level == 1) {
+        startLevel1();
+    }
+}
 
+function startLevel1() {
     level1 = new Level([
-        new Chicken(),
         // new Chicken(),
         // new Chicken(),
-        new Endboss(),
+        // new Chicken(),
+        // new Endboss(),
         // new SmallChicken(),
         // new SmallChicken(),
         // new SmallChicken(),
         // new SmallChicken(),
         // new SmallChicken(),
-        new SmallChicken()
+        // new SmallChicken()
     ],
     [
         new Cloud(500),
@@ -64,3 +69,4 @@ function startLevel1() {
     ]
 )
 }
+

@@ -2,30 +2,41 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let isGameStarted = true;
+let currentLevel = 0;
 
 function init() {
     canvas = document.getElementById('canvas');
     startScreen = document.getElementById('start-screen');
-    gameCondition(canvas, startScreen);
+    endScreen = document.getElementById('end-screen');
+    gameCondition(canvas, startScreen, endScreen);
     checkOrientation();
 }
 
-function gameCondition(canvas, startScreen) {
-    let mobileButtonsTop = document.getElementById('mobile-buttons-top')
-    let mobileButtonsBottom = document.getElementById('mobile-buttons-bottom')
+function initLevel(level) {
+    startLevel1(level);
+}
+
+function gameCondition(canvas, startScreen, endScreen) {
+    let mobileButtonsTop = document.getElementById('mobile-buttons-top');
+    let mobileButtonsBottom = document.getElementById('mobile-buttons-bottom');
     if(isGameStarted) {
-        canvas.style.display = 'block';
+        initLevel(1);
+        currentLevel = 1;
+        canvas.style.display = 'flex';
         startScreen.style.display = 'none';
-        startLevel1();
         mobileButtonsTop.style.display = 'flex';
         mobileButtonsBottom.style.display = 'flex';
         world = new World(canvas, keyboard, isGameStarted);
-    } else if(!isGameStarted) {
+    } else if(!isGameStarted && currentLevel == 0) {
         clearAllIntervals();
         canvas.style.display = 'none';
         startScreen.style.display = 'flex';
         mobileButtonsTop.style.display = 'none';
         mobileButtonsBottom.style.display = 'none';
+    } else if(world.character.energy == 0 && currentLevel > 0) {
+        clearAllIntervals();
+        canvas.style.display = 'none';
+        endScreen.style.display = 'flex';
     }
 }
 
@@ -34,20 +45,19 @@ function startGame() {
     init();
 }
 
+function endGame() {
+    isGameStarted = false;
+    init();
+}
+
 function toggleOverlay() {
     let refOverlay = document.getElementById('overlay');
     let currentStyle = window.getComputedStyle(refOverlay).display;
-
     if(currentStyle == 'none') {
         refOverlay.style.display = 'flex'
     } else if(currentStyle == 'flex') {
         refOverlay.style.display = 'none'
     }
-}
-
-function endGame() {
-    isGameStarted = false;
-    init();
 }
 
 function startFullscreen() {
