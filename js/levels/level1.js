@@ -8,16 +8,16 @@ function start(level) {
 
 function startLevel1() {
     level1 = new Level([
-        // new Chicken(),
-        // new Chicken(),
-        // new Chicken(),
-        // new Endboss(),
-        // new SmallChicken(),
-        // new SmallChicken(),
-        // new SmallChicken(),
-        // new SmallChicken(),
-        // new SmallChicken(),
-        // new SmallChicken()
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Endboss(),
+        new SmallChicken(),
+        new SmallChicken(),
+        new SmallChicken(),
+        new SmallChicken(),
+        new SmallChicken(),
+        new SmallChicken()
     ],
     [
         new Cloud(500),

@@ -47,6 +47,13 @@ class MovableObject extends DrawableObject{
         this.currentImage++;
     }
 
+    playAnimationForOneTime(images) {
+        for (let i = 0; i < images.length; i++) {
+            let path = images[i];
+            this.img = this.imageCache[path];
+        }
+    }
+
     randomImage(images) {
         let i = Math.floor(Math.random() * images.length);
         let path = images[i];

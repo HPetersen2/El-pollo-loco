@@ -93,8 +93,8 @@ h2 {
 
 /* Querformat bei schmalen Bildschirmen */
 @media (max-width: 932px) and (orientation: landscape) {
-    #fullscreen-container {
-        min-height: 100vh;
+    canvas {
+        width: 100%;
     }
 
     .turn-device-container {
@@ -103,7 +103,6 @@ h2 {
 
     .canvas-container {
         display: flex; /* Zeige den Canvas */
-        position: absolute;
     }
 
     h1 {
@@ -127,14 +126,20 @@ h2 {
     }
 }
 
+@media (max-width: 720px) and (orientation: landscape) {
+    .screen-container {
+        width: auto;
+    }
+}
+
 .screen-container {
     background-image: url('../img/9_intro_outro_screens/start/startscreen_1.png');
     z-index: 1;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: 100%;
-    height: 100%;
+    width: 720px;
+    height: 480px;
     display: flex;
     justify-content: center;
 }
@@ -196,21 +201,16 @@ h2 {
 }
 
 .canvas-container {
-    display: block;
-    position: relative;
-    width: 720px;
-    height: 480px;
+    display: flex;
+    flex-direction: column;
 }
 
 .mobile-button-container-top {
-    display: none !important;
-    justify-content: flex-end;
+    display: flex;
+    justify-content: center;
     gap: 8px;
-    position: absolute;
-    top: 10px;
-    left: 0;
-    margin: 0;
     width: 100%;
+    margin-bottom: 12px;
 }
 
 .mobile-button-icon {
@@ -233,11 +233,8 @@ h2 {
     display: flex;
     justify-content: space-between;
     gap: 8px;
-    position: absolute;
-    bottom: -60px;
-    left: 0;
-    margin: 0;
     width: 100%;
+    margin-top: 12px;
 }
 
 .mobile-button-container-bottom-left {

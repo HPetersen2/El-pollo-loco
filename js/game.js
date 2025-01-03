@@ -1,7 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let isGameStarted = true;
+let isGameStarted = false;
 let currentLevel = 0;
 
 function init() {

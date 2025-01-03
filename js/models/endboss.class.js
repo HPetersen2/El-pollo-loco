@@ -76,7 +76,7 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_ATTACK);
             }
             if(this.energy == 0) {
-                this.playAnimation(this.IMAGES_DEAD);
+                this.playAnimationForOneTime(this.IMAGES_DEAD);
             }
         }, 200);
     
@@ -85,7 +85,7 @@ class Endboss extends MovableObject {
             if(this.live()) {
                 this.moveLeft();
             }
-        }, 500);
+        }, 250);
 
 
         setInterval(() => {
@@ -101,6 +101,6 @@ class Endboss extends MovableObject {
     }
 
     playHurtAnimation() {
-        this.playAnimation(this.IMAGES_HURT);
+        this.playAnimation(this.IMAGES_HURT);   
     }
 }

@@ -10,7 +10,7 @@ class World {
     statusBarCoins = new StatusBarCoins();
     statusBarBottles = new StatusBarBottles();
     throwableObjects = [];
-    playSounds = false;
+    playSounds = true;
     game_sound = new Audio('./audio/el_pollo_loco.mp3');
     collecting_coin_sound = new Audio('./audio/collect.mp3');
     collecting_bottle_sound = new Audio('./audio/bottle.mp3');
@@ -23,6 +23,7 @@ class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.isGameStarted = isGameStarted;
+        // this.playGameSound();
         this.draw();
         this.setWorld();
         this.run();
@@ -84,11 +85,10 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if(bottle.isColliding(enemy) && enemy.energy > 0) {
                     this.playSound(this.dead_chicken_sound);
-                    console.log(enemy.constructor.name)
                     if(enemy.constructor.name == 'Chicken' || enemy.constructor.name == 'SmallChicken') {
                         enemy.energy = 0;
                     } else if(enemy.constructor.name == 'Endboss') {
-                        enemy.energy -= 20;
+                        enemy.energy -= 10;
                         this.statusBarEndboss.setPercentage(enemy.energy);
                         enemy.playHurtAnimation();
                     }
@@ -148,7 +148,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
+        // mo.drawFrame(this.ctx);
 
 
         if(mo.otherDirection) {
@@ -174,11 +174,13 @@ class World {
         }
     }
 
-    playGameSound(sound, isGameStarted) {
-        if(this.playSounds && isGameStarted) {
-            sound.play();
-        }
-    }
+    // playGameSound() {
+    //     setInterval(() => {
+    //         if(this.playSounds && isGameStarted) {
+    //             this.game_sound.play();
+    //         }
+    //     }, 20);
+    // }
 
     muteAllSounds() {
         let refMuteIcon = document.getElementById('mute')
