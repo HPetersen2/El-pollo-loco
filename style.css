@@ -18,11 +18,14 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
+    max-width: 1920px;
+    margin: 0 auto;
+    background-position: center;
     background-image: url('img/desert.png');
-    background-repeat: no-repeat, no-repeat;
+    background-repeat: no-repeat;
     font-family: 'zabras', Arial, sans-serif;
-    overflow: hidden;
+    overflow-y: hidden;
+
 }
 
 canvas {
@@ -74,10 +77,6 @@ h2 {
         display: none !important;
     }
 
-    .canvas-container {
-        display: none !important;
-    }
-
     h1 {
         display: none;
     }
@@ -94,15 +93,15 @@ h2 {
 /* Querformat bei schmalen Bildschirmen */
 @media (max-width: 932px) and (orientation: landscape) {
     canvas {
-        width: 100%;
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 
     .turn-device-container {
         display: none; /* Verstecke den Hinweis */
-    }
-
-    .canvas-container {
-        display: flex; /* Zeige den Canvas */
     }
 
     h1 {
@@ -110,11 +109,21 @@ h2 {
     }
 
     .mobile-button-container-top {
+        z-index: 10;
         display: flex;
+        justify-content: center;
+        gap: 8px;
+        position: absolute;
+        top: 10px;
     }
 
     .mobile-button-container-bottom {
+        z-index: 10;
         display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        position: absolute;
+        bottom: 10px;
     }
 
     .screen-container {
@@ -123,12 +132,6 @@ h2 {
 
     .button-container {
         margin-top: 12px !important;
-    }
-}
-
-@media (max-width: 720px) and (orientation: landscape) {
-    .screen-container {
-        width: auto;
     }
 }
 
@@ -200,17 +203,9 @@ h2 {
     height: 100%;
 }
 
-.canvas-container {
-    display: flex;
-    flex-direction: column;
-}
-
 .mobile-button-container-top {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
+    display: none;
     width: 100%;
-    margin-bottom: 12px;
 }
 
 .mobile-button-icon {
@@ -230,11 +225,8 @@ h2 {
 }
 
 .mobile-button-container-bottom {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
+    display: none;
     width: 100%;
-    margin-top: 12px;
 }
 
 .mobile-button-container-bottom-left {

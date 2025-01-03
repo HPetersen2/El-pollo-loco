@@ -1,0 +1,12 @@
+Eine Funktion ist maximal 14 Zeilen lang (HTML ausgenommen)
+
+Funktionen sind nach JSDoc Standard dokumentiert: 
+
+Besteht die Möglichkeit zum Neustart nach GameOver?
+
+Man kann das Spiel in den Fullscreen Modus schalten.
+
+Wenn das Spiel gewonnen oder verloren ist, wird mir ein Endscreen gezeigt. Es sollte die Möglichkeit zum Restart des Spiels sowie die Möglichkeit zum Verlassen des Spiels gegeben sein (zurück zum Home Screen).
+
+Die Animationen des Charakters sind grundsätzlich flüssig, auch wenn er verletzt wird oder springt.
+

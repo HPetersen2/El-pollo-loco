@@ -87,9 +87,11 @@ class World {
                     this.playSound(this.dead_chicken_sound);
                     if(enemy.constructor.name == 'Chicken' || enemy.constructor.name == 'SmallChicken') {
                         enemy.energy = 0;
+                        bottle.playAnimation(IMAGES_SPLASH);
                     } else if(enemy.constructor.name == 'Endboss') {
                         enemy.energy -= 10;
                         this.statusBarEndboss.setPercentage(enemy.energy);
+                        bottle.playAnimation(bottle.IMAGES_SPLASH);
                         enemy.playHurtAnimation();
                     }
                 }

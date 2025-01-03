@@ -34,9 +34,8 @@
             <h2>Please turn your device!</h2>
             <img  class="image-turn-device" src="./img/icons/Rotate_mobile_rotate_smartphone_phone.png" alt="turn-your-device">
         </div>
-        <div class="canvas-container" id="canvas-container">
             <div class="mobile-button-container-top" id="mobile-buttons-top">
-                <div class="mobile-button-icon">
+                <div class="mobile-button-icon" onclick="startGame()" id="start-touch-button">
                     <img src="./img/icons/play-circle.svg" alt="play">
                 </div>
                 <div class="mobile-button-icon" onclick="world.muteAllSounds()">
@@ -63,7 +62,7 @@
                     <img src="./img/9_intro_outro_screens/game_over/game over.png" id="result-picture" alt="result">
                 </div>
             </div>
-            <canvas width="720px" height="480px" id="canvas">
+            <canvas width="720" height="480" id="canvas">
 
             </canvas>
             <div class="mobile-button-container-bottom" id="mobile-buttons-bottom">
@@ -84,7 +83,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div> 
 
 
