@@ -56,4 +56,5 @@ class ThrowableObject extends MovableObject {
             this.throw_sound.play();
         }
     }
+    
 }

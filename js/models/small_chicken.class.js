@@ -1,11 +1,8 @@
 class SmallChicken extends MovableObject {
-
     y = 410;
     height = 40;
     width = 50;
-
     energy = 100;
-
     offset = {
         top: 0,
         bottom: 0,
@@ -28,12 +25,9 @@ class SmallChicken extends MovableObject {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
-
         this.x = 300 + Math.random() * 1500;
-
         this.speed = 0.15 + Math.random() * 0.25;
         this.animate();
-
     }
     
     animate() {
@@ -42,7 +36,6 @@ class SmallChicken extends MovableObject {
                 this.moveLeft();
             }
         }, 1000 / 60);
-
 
         setInterval(() => {
             if(this.isDead(this.energy) == false) {

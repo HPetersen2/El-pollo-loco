@@ -7,15 +7,6 @@ let gameLose = false;
 let win_sound = new Audio('./audio/win.mp3');
 let lose_sound = new Audio('./audio/lose.mp3');
 
-window.addEventListener('resize', () => {
-    const button = document.querySelector('.button');
-    if (window.innerWidth >= 600) {
-        button.style.display = 'block';
-    } else {
-        button.style.display = 'none';
-    }
-});
-
 function init() {
     canvas = document.getElementById('canvas');
     startScreen = document.getElementById('start-screen');

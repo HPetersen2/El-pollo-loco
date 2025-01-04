@@ -40,13 +40,14 @@ class World {
         }, 200);
 
         setInterval(() => {
-            this.checkCollisionEnemies();
+            this.checkCollisionEndbossWithBottle();
         }, 15);
     }
 
     checkThrowObjects() {
         if(this.keyboard.D && this.character.numberOfBottles > 0 && !this.character.otherDirection) {
             this.character.wakeUp();
+            this.character.playAnimation(this.character.IMAGES_IDLE);
             this.character.numberOfBottles--;
             this.statusBarBottles.setPercentage(this.character.numberOfBottles);
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.numberOfBottles, this.playSounds);
@@ -55,25 +56,13 @@ class World {
     }
 
     checkCollisions() {
-        this.level.coins.forEach((coin, index) => {
-            if(this.character.isColliding(coin)) {
-                this.level.coins.splice(index, 1);
-                this.playSound(this.collecting_coin_sound);
-                this.character.numberOfCoins++;
-                this.statusBarCoins.setPercentage(this.character.numberOfCoins);
-            }
-        });
+        this.checkCollisionCharacterWithEnemy();
+        this.checkCollisionEnemyWithBottle();
+        this.checkCollisionBottle();
+        this.checkCollisionCoin();
+    }
 
-        this.level.bottles.forEach((bottle, index) => {
-            if(this.character.isColliding(bottle)) {
-                this.level.bottles.splice(index, 1);
-                this.bottles++
-                this.playSound(this.collecting_bottle_sound);
-                this.character.numberOfBottles++;
-                this.statusBarBottles.setPercentage(this.character.numberOfBottles);
-            }
-        });
-
+    checkCollisionCharacterWithEnemy() {
         this.level.enemies.forEach((enemy) => {
             if(this.character.isColliding(enemy) && enemy.energy > 0) {
                 this.playSound(this.hurt_sound);
@@ -81,14 +70,16 @@ class World {
                 this.statusBar.setPercentage(this.character.energy);
             }
         });
-        
+    }
+
+    checkCollisionEnemyWithBottle() {
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
                 if(bottle.isColliding(enemy) && enemy.energy > 0) {
                     this.playSound(this.dead_chicken_sound);
                     if(enemy.constructor.name == 'Chicken' || enemy.constructor.name == 'SmallChicken') {
                         enemy.energy = 0;
-                        bottle.playAnimation(IMAGES_SPLASH);
+                        bottle.playAnimation(bottle.IMAGES_SPLASH);
                     } else if(enemy.constructor.name == 'Endboss') {
                         enemy.energy -= 10;
                         this.statusBarEndboss.setPercentage(enemy.energy);
@@ -100,7 +91,30 @@ class World {
         });
     }
 
-    checkCollisionEnemies() {
+    checkCollisionCoin() {
+        this.level.coins.forEach((coin, index) => {
+            if(this.character.isColliding(coin)) {
+                this.level.coins.splice(index, 1);
+                this.playSound(this.collecting_coin_sound);
+                this.character.numberOfCoins++;
+                this.statusBarCoins.setPercentage(this.character.numberOfCoins);
+            }
+        });
+    }
+
+    checkCollisionBottle() {
+        this.level.bottles.forEach((bottle, index) => {
+            if(this.character.isColliding(bottle)) {
+                this.level.bottles.splice(index, 1);
+                this.bottles++
+                this.playSound(this.collecting_bottle_sound);
+                this.character.numberOfBottles++;
+                this.statusBarBottles.setPercentage(this.character.numberOfBottles);
+            }
+        });
+    }
+
+    checkCollisionEndbossWithBottle() {
         this.level.enemies.forEach((enemy, index) => {
             if(this.character.isColliding(enemy) && this.character.speedY > 20 && enemy.constructor.name != 'Endboss') {
                 if(!this.keyboard.SPACE) {
@@ -115,27 +129,21 @@ class World {
     // Draw() wird immer wieder aufgerufen
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.throwableObjects);
         this.addToMap(this.character);
-
         this.ctx.translate(-this.camera_x, 0); // Back
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBarEndboss);
         this.addToMap(this.statusBarCoins);
         this.addToMap(this.statusBarBottles);
         this.ctx.translate(this.camera_x, 0); // Forwards
-
         this.addObjectsToMap(this.level.enemies);
-
         this.ctx.translate(-this.camera_x, 0);
-
         let self = this;
         requestAnimationFrame(function() {
             self.draw()
@@ -154,8 +162,6 @@ class World {
         }
         mo.draw(this.ctx);
         // mo.drawFrame(this.ctx);
-
-
         if(mo.otherDirection) {
             this.flipImageBack(mo);
         }

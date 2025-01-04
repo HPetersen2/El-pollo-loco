@@ -1,12 +1,9 @@
 class Endboss extends MovableObject {
-
     hit_sound = new Audio('./audio/chicken-dead.mp3')
     height = 400;
     width = 250;
     y = 60;
-
     energy = 100;
-
     offset = {
         top: 120,
         bottom: 30,
@@ -67,34 +64,19 @@ class Endboss extends MovableObject {
     }
 
     animate() {
-
         setInterval(() => {
-            if(this.energy == 100) {
-                this.playAnimation(this.IMAGES_ALERT)
-            }
-            if(this.energy < 100) {
-                this.playAnimation(this.IMAGES_ATTACK);
-            }
-            if(this.energy == 0) {
-                this.playAnimationForOneTime(this.IMAGES_DEAD);
-                setTimeout(() => winGame(), 2000);
-            }
+            if(this.energy == 100) {this.playAnimation(this.IMAGES_ALERT)}
+            if(this.energy < 100) {this.playAnimation(this.IMAGES_ATTACK)}
+            if(this.energy == 0) {this.died()}
         }, 200);
-    
 
         setInterval(() => {
-            if(this.live()) {
-                this.moveLeft();
-            }
+            if(this.live()) {this.moveLeft()}
         }, 250);
 
-
         setInterval(() => {
-            if(this.live()) {
-                this.playAnimation(this.IMAGES_WALKING);
-            }
+            if(this.live()) {this.playAnimation(this.IMAGES_WALKING)}
         }, 1000);
-
     }
 
     live() {
@@ -103,5 +85,10 @@ class Endboss extends MovableObject {
 
     playHurtAnimation() {
         this.playAnimation(this.IMAGES_HURT);   
+    }
+
+    died() {
+        this.playAnimationForOneTime(this.IMAGES_DEAD);
+        setTimeout(() => winGame(), 2000);
     }
 }

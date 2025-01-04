@@ -1,11 +1,12 @@
 class Character extends MovableObject {
-
     currentX;
     sleep = false;
     dead = false;
-
     height = 300;
     y = 100;
+    world;
+    walking_sound = new Audio('audio/running.mp3');
+    sleeping_sound = new Audio('audio/sleep.mp3');
 
     offset = {
         top: 30,
@@ -75,9 +76,6 @@ class Character extends MovableObject {
         '../img/2_character_pepe/1_idle/long_idle/I-19.png',
         '../img/2_character_pepe/1_idle/long_idle/I-20.png'
     ];
-    world;
-    walking_sound = new Audio('audio/running.mp3');
-    sleeping_sound = new Audio('audio/sleep.mp3');
 
     constructor() {
         super().loadImage('../img/2_character_pepe/1_idle/idle/I-1.png');
@@ -93,54 +91,41 @@ class Character extends MovableObject {
     }
 
     animate() {
-
         setInterval(() => {
             this.walking_sound.pause();
-            if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.dead) {
-                this.wakeUp();
-                this.moveRight();
-                this.otherDirection = false;
-                this.world.playSound(this.walking_sound);
-                this.savePosition();
-            }
-            if(this.world.keyboard.LEFT && this.x > 0 && !this.dead) {
-                this.wakeUp();
-                this.otherDirection = true;
-                this.moveLeft();
-                this.world.playSound(this.walking_sound);
-                this.savePosition();
-            }
-            if(this.world.keyboard.SPACE && !this.isAboveGround() && !this.dead) {
-                this.wakeUp();
-                this.jump();
-            }
+            if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.dead) {this.walkRight()};
+            if(this.world.keyboard.LEFT && this.x > 0 && !this.dead) {this.walkLeft()};
+            if(this.world.keyboard.SPACE && !this.isAboveGround() && !this.dead) {this.jump()};
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60)
-
         setInterval(() => {
-            if(this.sleep) {
-                this.playAnimation(this.IMAGES_SLEEP);
-                this.world.playSound(this.sleeping_sound);
-            }
-            else if(this.isDead(this.energy)) {
-                this.playAnimation(this.IMAGES_DEAD);
-                this.dead = true;
-                setTimeout(() => loseGame(), 2000);
-            }
-            else if(this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-            }
-            else if(this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
-            } else {
-                if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT && !this.world.keyboard.SPACE) {
-                    this.playAnimation(this.IMAGES_WALKING);
-                }
+            if(this.sleep) {this.sleeps()}
+            else if(this.isDead(this.energy)) {this.die()}
+            else if(this.isHurt()) {this.playAnimation(this.IMAGES_HURT);}
+            else if(this.isAboveGround()) {this.playAnimation(this.IMAGES_JUMPING);} else {
+                if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT && !this.world.keyboard.SPACE) {this.playAnimation(this.IMAGES_WALKING);}
             }
         }, 100);
     }
 
+    walkLeft() {
+        this.wakeUp();
+        this.otherDirection = true;
+        this.moveLeft();
+        this.world.playSound(this.walking_sound);
+        this.savePosition();
+    }
+
+    walkRight() {
+        this.wakeUp();
+        this.moveRight();
+        this.otherDirection = false;
+        this.world.playSound(this.walking_sound);
+        this.savePosition();
+    }
+
     jump() {
+        this.wakeUp();
         this.speedY = 30;
     }
 
@@ -152,12 +137,24 @@ class Character extends MovableObject {
         }, 15000)
     }
 
+    sleeps() {
+        this.playAnimation(this.IMAGES_SLEEP);
+        this.world.playSound(this.sleeping_sound);
+    }
+
     wakeUp() {
+        this.walking_sound.pause();
         this.sleep = false;
     }
 
     savePosition() {
         this.currentX = this.x;
+    }
+
+    die() {
+        this.playAnimation(this.IMAGES_DEAD);
+        this.dead = true;
+        setTimeout(() => loseGame(), 2000);
     }
 
 }

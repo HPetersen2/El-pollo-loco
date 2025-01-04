@@ -10,7 +10,6 @@ class MovableObject extends DrawableObject{
     numberOfBottles = 0;
     lastHit = 0;
 
-
     applyGravity() {
         setInterval(() => {
             if(this.isAboveGround() || this.speedY > 0) {
@@ -85,4 +84,5 @@ class MovableObject extends DrawableObject{
     isDead(energy) {
         return energy == 0;
     }
+    
 }
