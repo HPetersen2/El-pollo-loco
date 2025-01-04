@@ -23,6 +23,7 @@ body {
     background-position: center;
     background-image: url('img/desert.png');
     background-repeat: no-repeat;
+    background-size: cover;
     font-family: 'zabras', Arial, sans-serif;
     overflow-y: hidden;
 
@@ -82,7 +83,7 @@ h2 {
     }
 
     .screen-container {
-        display: none;
+        display: none !important;
     }
 
     .endscreen-container {
@@ -109,12 +110,7 @@ h2 {
     }
 
     .mobile-button-container-top {
-        z-index: 10;
-        display: flex;
-        justify-content: center;
-        gap: 8px;
-        position: absolute;
-        top: 10px;
+        display: flex !important;
     }
 
     .mobile-button-container-bottom {
@@ -128,6 +124,16 @@ h2 {
 
     .screen-container {
         background-position: top !important;
+    }
+
+    .endscreen-container {
+        background-position: top !important;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .end-button-container {
+        margin-top: 12px !important;
     }
 
     .button-container {
@@ -188,24 +194,35 @@ h2 {
 
 .endscreen-container {
     display: none;
-    background-image: url('./img/5_background/first_half_background.png');
-    z-index: 1;
+    justify-content: center;
+    background-image: url('./img/9_intro_outro_screens/game_over_screen.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
+    width: 720px;
+    height: 480px;
+    z-index: 1;
 }
 
-#result-picture {
-    width: 100%;
-    height: 100%;
+.end-button-container {
+    display: flex;
+    margin-top: 50px;
+    gap: 8px;
+}
+
+#back-home, #play-again {
+    width: 150px;
+    height: 60px;
 }
 
 .mobile-button-container-top {
-    display: none;
+    display: none !important;
+    justify-content: center;
+    gap: 8px;
     width: 100%;
+    z-index: 1;
+    position: absolute;
+    top: 10px;
 }
 
 .mobile-button-icon {

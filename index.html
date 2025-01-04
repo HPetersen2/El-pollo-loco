@@ -34,64 +34,59 @@
             <h2>Please turn your device!</h2>
             <img  class="image-turn-device" src="./img/icons/Rotate_mobile_rotate_smartphone_phone.png" alt="turn-your-device">
         </div>
-            <div class="mobile-button-container-top" id="mobile-buttons-top">
-                <div class="mobile-button-icon" onclick="startGame()" id="start-touch-button">
-                    <img src="./img/icons/play-circle.svg" alt="play">
+        <div class="mobile-button-container-top" id="mobile-buttons-top">
+            <div class="mobile-button-icon" onclick="world.muteAllSounds()">
+                <img id="mute" src="./img/icons/volume-up.svg" alt="mute">
+            </div>
+        </div>
+        <div class="screen-container" id="start-screen">
+            <div class="button-container">
+                <div class="start-button-container">
+                    <div class="start-screen-button" onclick="startGame()">
+                        Start
+                    </div>
+                    <div class="start-screen-button" id="help-button" onclick="toggleOverlay()">
+                        Help
+                    </div>
                 </div>
-                <div class="mobile-button-icon" onclick="world.muteAllSounds()">
-                    <img id="mute" src="./img/icons/volume-up.svg" alt="mute">
+                <div class="legal-notice-container">
+                    <a target="_blank" href="./legal_notice.html">Impressum & Datenschutz</a>
                 </div>
             </div>
-            <div class="screen-container" id="start-screen">
-                <div class="button-container">
-                    <div class="start-button-container">
-                        <div class="start-screen-button" onclick="startGame()">
-                            Start
-                        </div>
-                        <div class="start-screen-button" id="help-button" onclick="toggleOverlay()">
-                            Help
-                        </div>
-                    </div>
-                    <div class="legal-notice-container">
-                        <a target="_blank" href="./legal_notice.html">Impressum & Datenschutz</a>
-                    </div>
+        </div>
+        <div class="endscreen-container" id="end-screen">
+            <div class="end-button-container">
+                <div class="start-screen-button" id="play-again" onclick="startGame()">
+                    Erneut Spielen
+                </div>
+                <div class="start-screen-button" id="back-home" onclick="backHome()">
+                    Zurück zum Start
                 </div>
             </div>
-            <div class="endscreen-container" id="end-screen">
-                <div>
-                    <img src="./img/9_intro_outro_screens/game_over/game over.png" id="result-picture" alt="result">
+        </div>
+        <canvas width="720" height="480" id="canvas">
+
+        </canvas>
+        <div class="mobile-button-container-bottom" id="mobile-buttons-bottom">
+            <div class="mobile-button-container-bottom-left">
+                <div class="mobile-button-icon" id="Btnleft">
+                    <img src="./img/icons/arrow-left-circle.svg" alt="left">
+                </div>
+                <div class="mobile-button-icon" id="Btnright">
+                    <img src="./img/icons/arrow-right-circle.svg" alt="right">
                 </div>
             </div>
-            <canvas width="720" height="480" id="canvas">
-
-            </canvas>
-            <div class="mobile-button-container-bottom" id="mobile-buttons-bottom">
-                <div class="mobile-button-container-bottom-left">
-                    <div class="mobile-button-icon" id="Btnleft">
-                        <img src="./img/icons/arrow-left-circle.svg" alt="left">
-                    </div>
-                    <div class="mobile-button-icon" id="Btnright">
-                        <img src="./img/icons/arrow-right-circle.svg" alt="right">
-                    </div>
+            <div class="mobile-button-container-bottom-right">
+                <div class="mobile-button-icon" id="Btnup">
+                    <img src="./img/icons/arrow-up-circle.svg" alt="up">
                 </div>
-                <div class="mobile-button-container-bottom-right">
-                    <div class="mobile-button-icon" id="Btnup">
-                        <img src="./img/icons/arrow-up-circle.svg" alt="up">
-                    </div>
-                    <div class="mobile-button-icon" id="Btnthrow">
-                        <img src="./img/icons/heart-arrow.svg" alt="throw">
-                    </div>
+                <div class="mobile-button-icon" id="Btnthrow">
+                    <img src="./img/icons/heart-arrow.svg" alt="throw">
                 </div>
             </div>
-    </div> 
-
-
-            <!-- <div class="control">
-                <img onclick="startFullscreen()" src="./img/icons/fullscreen.png" alt="fullscreen">
-            </div> -->
-
-
-     <div id="overlay" class="overlay">
+        </div>
+    </div>
+    <div id="overlay" class="overlay" onclick="handleOverlayClick(event)">
         <div class="overlay-content">
             <div class="overlay-header">
                 <h2>Spielanleitung</h2>
@@ -103,6 +98,6 @@
                 <p><span>Leertaste</span>: Springen</p>
             </div>
         </div>
-     </div>   
+    </div>
 </body>
 </html>

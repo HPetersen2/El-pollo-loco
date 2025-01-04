@@ -77,6 +77,7 @@ class Endboss extends MovableObject {
             }
             if(this.energy == 0) {
                 this.playAnimationForOneTime(this.IMAGES_DEAD);
+                setTimeout(() => winGame(), 2000);
             }
         }, 200);
     

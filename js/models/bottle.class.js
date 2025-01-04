@@ -6,7 +6,7 @@ class Bottle extends MovableObject {
 
     offset = {
         top: 0,
-        bottom: 10,
+        bottom: 0,
         left: 20,
         right: 5
     };

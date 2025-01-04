@@ -41,14 +41,15 @@ class World {
 
         setInterval(() => {
             this.checkCollisionEnemies();
-        }, 25);
+        }, 15);
     }
 
     checkThrowObjects() {
         if(this.keyboard.D && this.character.numberOfBottles > 0 && !this.character.otherDirection) {
+            this.character.wakeUp();
             this.character.numberOfBottles--;
             this.statusBarBottles.setPercentage(this.character.numberOfBottles);
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.numberOfBottles, this.playSounds)
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.numberOfBottles, this.playSounds);
             this.throwableObjects.push(bottle);
         }
     }
@@ -101,10 +102,12 @@ class World {
 
     checkCollisionEnemies() {
         this.level.enemies.forEach((enemy, index) => {
-            if(this.character.isColliding(enemy) && this.character.y != 190 && enemy.constructor.name != 'Endboss') {
-                this.playSound(this.dead_chicken_sound);
-                enemy.energy = 0;
-                // setTimeout(() => this.level.enemies.splice(index, 1), 1000)
+            if(this.character.isColliding(enemy) && this.character.speedY > 20 && enemy.constructor.name != 'Endboss') {
+                if(!this.keyboard.SPACE) {
+                    this.playSound(this.dead_chicken_sound);
+                    enemy.energy = 0;
+                    // setTimeout(() => this.level.enemies.splice(index, 1), 1000)
+                }
             }
         });
     }

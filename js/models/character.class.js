@@ -8,8 +8,8 @@ class Character extends MovableObject {
     y = 100;
 
     offset = {
-        top: 120,
-        bottom: 30,
+        top: 30,
+        bottom: 0,
         left: 40,
         right: 30
     };
@@ -97,21 +97,21 @@ class Character extends MovableObject {
         setInterval(() => {
             this.walking_sound.pause();
             if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.dead) {
-                this.sleep = false;
+                this.wakeUp();
                 this.moveRight();
                 this.otherDirection = false;
                 this.world.playSound(this.walking_sound);
-                this.currentX = this.x;
+                this.savePosition();
             }
             if(this.world.keyboard.LEFT && this.x > 0 && !this.dead) {
-                this.sleep = false;
+                this.wakeUp();
                 this.otherDirection = true;
                 this.moveLeft();
                 this.world.playSound(this.walking_sound);
-                this.currentX = this.x;
+                this.savePosition();
             }
             if(this.world.keyboard.SPACE && !this.isAboveGround() && !this.dead) {
-                this.sleep = false;
+                this.wakeUp();
                 this.jump();
             }
             this.world.camera_x = -this.x + 100;
@@ -125,7 +125,7 @@ class Character extends MovableObject {
             else if(this.isDead(this.energy)) {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.dead = true;
-                endGame();
+                setTimeout(() => loseGame(), 2000);
             }
             else if(this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
@@ -133,7 +133,7 @@ class Character extends MovableObject {
             else if(this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else {
-                if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT && !this.world.keyboard.SPACE) {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
@@ -150,6 +150,14 @@ class Character extends MovableObject {
                 this.sleep = true;
             }
         }, 15000)
+    }
+
+    wakeUp() {
+        this.sleep = false;
+    }
+
+    savePosition() {
+        this.currentX = this.x;
     }
 
 }
