@@ -236,9 +236,9 @@ class World {
      * This function plays a sound.
      * @param {string} sound 
      */
-    playSound(sound) {
+    async playSound(sound) {
         if(this.playSounds) {
-            sound.play();
+            await sound.play();
         }
     }
 

@@ -22,8 +22,6 @@ function startLevel1() {
         new SmallChicken(),
         new SmallChicken(),
         new SmallChicken(),
-        new SmallChicken(),
-        new SmallChicken(),
         new SmallChicken()
     ],
     [
