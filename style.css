@@ -12,6 +12,14 @@ a:hover {
     text-decoration: underline;
 }
 
+.d_none {
+    display: none;
+}
+
+.d_flex {
+    display: flex;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -83,11 +91,15 @@ h2 {
     }
 
     .screen-container {
-        display: none !important;
+        display: none;
     }
 
-    .endscreen-container {
-        display: none !important;
+    .mobile-button-container-top {
+        display: none;
+    }
+
+        .mobile-button-container-top {
+        display: none;
     }
 }
 
@@ -109,13 +121,8 @@ h2 {
         display: none; /* Optional: Verstecke H1 */
     }
 
-    .mobile-button-container-top {
-        display: flex !important;
-    }
-
     .mobile-button-container-bottom {
         z-index: 10;
-        display: flex;
         justify-content: space-between;
         gap: 8px;
         position: absolute;
@@ -124,6 +131,8 @@ h2 {
 
     .screen-container {
         background-position: top !important;
+        width: 100vw;
+        height: 100vh;
     }
 
     .endscreen-container {
@@ -149,7 +158,6 @@ h2 {
     background-position: center;
     width: 720px;
     height: 480px;
-    display: flex;
     justify-content: center;
 }
 
@@ -193,7 +201,6 @@ h2 {
 }
 
 .endscreen-container {
-    display: none;
     justify-content: center;
     background-image: url('./img/9_intro_outro_screens/game_over_screen.png');
     background-size: contain;
@@ -216,7 +223,6 @@ h2 {
 }
 
 .mobile-button-container-top {
-    display: none !important;
     justify-content: center;
     gap: 8px;
     width: 100%;
@@ -242,7 +248,6 @@ h2 {
 }
 
 .mobile-button-container-bottom {
-    display: none;
     width: 100%;
 }
 

@@ -1,11 +1,18 @@
 let level1;
 
+/**
+ * This function starts the respective level.
+ * @param {number} level - The function receives the number from the level.
+ */
 function start(level) {
     if(level == 1) {
         startLevel1();
     }
 }
 
+/**
+ * This function creates the level and the corresponding objects.
+ */
 function startLevel1() {
     level1 = new Level([
         new Chicken(),

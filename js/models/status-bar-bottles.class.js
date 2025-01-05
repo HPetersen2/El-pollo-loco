@@ -10,6 +10,9 @@ class StatusBarBottles extends DrawableObject {
         '../img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/100.png'
     ];
 
+    /**
+     * The constructor loads the image of the status bar, positions it and sets it to 100%.
+     */
     constructor() {
         super();
         this.loadImages(this.IMAGES);
@@ -20,12 +23,20 @@ class StatusBarBottles extends DrawableObject {
         this.setPercentage(0);
     }
 
+    /**
+     * This function returns the respective path, depending on which status bar is to be displayed.
+     * @param {number} numberOfBottles - This variable is passed the number of bottles.
+     */
     setPercentage(numberOfBottles) {
         this.calculatePercentage(numberOfBottles);
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+    /**
+     * This function returns the index for the respective image, using the respective percentage.
+     * @returns index
+     */
     resolveImageIndex() {
         if(this.percentage == 100) {
             return 5;
@@ -42,6 +53,10 @@ class StatusBarBottles extends DrawableObject {
         }
     }
 
+    /**
+     * This function uses the number of bottles to calculate the value as a percentage.
+     * @param {number} numberOfBottles - This variable is passed the number of bottles.
+     */
     calculatePercentage(numberOfBottles) {
         this.percentage = numberOfBottles / 5 * 100;
     }

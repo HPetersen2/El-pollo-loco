@@ -18,6 +18,12 @@ class World {
     dead_chicken_sound = new Audio('./audio/chicken-dead.mp3');
     isGameStarted;
 
+    /**
+     * The constructor creates the canvas and creates the world.
+     * @param {object} canvas 
+     * @param {object} keyboard 
+     * @param {boolean} isGameStarted 
+     */
     constructor(canvas, keyboard, isGameStarted) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -29,10 +35,16 @@ class World {
         this.run();
     }
 
+    /**
+     * This function places the character in the World.
+     */
     setWorld() {
         this.character.world = this;
     }
 
+    /**
+     * This function checks for collisions with other objects when the character is running.
+     */
     run() {
         setInterval(() => {
             this.checkCollisions();
@@ -44,6 +56,9 @@ class World {
         }, 15);
     }
 
+    /**
+     * This function checks whether a bottle is thrown.
+     */
     checkThrowObjects() {
         if(this.keyboard.D && this.character.numberOfBottles > 0 && !this.character.otherDirection) {
             this.character.wakeUp();
@@ -55,6 +70,9 @@ class World {
         }
     }
 
+    /**
+     * This function calls up all collision functions.
+     */
     checkCollisions() {
         this.checkCollisionCharacterWithEnemy();
         this.checkCollisionEnemyWithBottle();
@@ -62,6 +80,9 @@ class World {
         this.checkCollisionCoin();
     }
 
+    /**
+     * This function checks for a collision with an enemy.
+     */
     checkCollisionCharacterWithEnemy() {
         this.level.enemies.forEach((enemy) => {
             if(this.character.isColliding(enemy) && enemy.energy > 0) {
@@ -72,6 +93,9 @@ class World {
         });
     }
 
+    /**
+     * This function checks for a collision with a bottle.
+     */
     checkCollisionEnemyWithBottle() {
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
@@ -91,6 +115,9 @@ class World {
         });
     }
 
+    /**
+     * This function checks for a collision with a coin.
+     */
     checkCollisionCoin() {
         this.level.coins.forEach((coin, index) => {
             if(this.character.isColliding(coin)) {
@@ -102,6 +129,9 @@ class World {
         });
     }
 
+    /**
+     * This function checks for a collision with a bottle.
+     */
     checkCollisionBottle() {
         this.level.bottles.forEach((bottle, index) => {
             if(this.character.isColliding(bottle)) {
@@ -114,6 +144,9 @@ class World {
         });
     }
 
+    /**
+     * This function checks a collision with a bottle and the final boss.
+     */
     checkCollisionEndbossWithBottle() {
         this.level.enemies.forEach((enemy, index) => {
             if(this.character.isColliding(enemy) && this.character.speedY > 20 && enemy.constructor.name != 'Endboss') {
@@ -126,7 +159,9 @@ class World {
         });
     }
 
-    // Draw() wird immer wieder aufgerufen
+    /**
+     * This function draws the objects into the canvas and is called again and again.
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -150,12 +185,20 @@ class World {
         });
     }
 
+    /**
+     * This function adds several objects to the map.
+     * @param {object} objects 
+     */
     addObjectsToMap(objects){
         objects.forEach(o => {
             this.addToMap(o);
         });
     }
 
+    /**
+     * This function adds a single object to the map.
+     * @param {object} mo 
+     */
     addToMap(mo) {
         if(mo.otherDirection) {
             this.flipImage(mo);
@@ -167,6 +210,10 @@ class World {
         }
     }
 
+    /**
+     * This function mirrors an image.
+     * @param {object} mo 
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -174,11 +221,19 @@ class World {
         mo.x = mo.x * -1;
     }
 
+    /**
+     * This function reflects an image back.
+     * @param {object} mo 
+     */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
 
+    /**
+     * This function plays a sound.
+     * @param {string} sound 
+     */
     playSound(sound) {
         if(this.playSounds) {
             sound.play();
@@ -193,6 +248,9 @@ class World {
     //     }, 20);
     // }
 
+    /**
+     * This function mutes all sounds.
+     */
     muteAllSounds() {
         let refMuteIcon = document.getElementById('mute')
         if(refMuteIcon.getAttribute("src") == './img/icons/volume-up.svg') {

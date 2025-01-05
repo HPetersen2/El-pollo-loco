@@ -13,6 +13,9 @@ class Coin extends MovableObject {
         '../img/8_coin/coin_2.png'
     ];
 
+    /**
+     * Der Constructor erstellt einen Coin und positioniert ihm im Kanvas.
+     */
     constructor() {
         super();
         this.loadImage('../img/8_coin/coin_1.png');
@@ -22,6 +25,9 @@ class Coin extends MovableObject {
         this.animate();
     }
 
+    /**
+     * This function animates the coins in the canvas in which they rotate.
+     */
     animate() {
         setInterval(() => {
             this.playAnimation(this.IMAGES_COINS);

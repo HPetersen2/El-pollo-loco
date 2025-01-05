@@ -6,11 +6,17 @@ class Keyboard {
     SPACE = false;
     D = false;
 
+    /**
+     * The constructor starts the two functions that check the keystrokes or the touch buttons.
+     */
     constructor() {
         this.bindKeyPressEvents();
         this.bindBtnPressEvents();
     }
 
+    /**
+     * This function checks whether the respective keys on the keyboard have been pressed.
+     */
     bindKeyPressEvents() {
         window.addEventListener('keydown', (e) => {
             if(e.keyCode == 39) {
@@ -65,6 +71,9 @@ class Keyboard {
         });
     }
 
+    /**
+     * This function checks whether the respective buttons have been pressed on the mobile device.
+     */
     bindBtnPressEvents() {
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('Btnleft').addEventListener('touchstart', (e) => {

@@ -21,6 +21,9 @@ class Chicken extends MovableObject {
         '../img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
     ];
 
+    /**
+     * The constructor positions the chicken in the canvas. It also loads the images and starts the animation function.
+     */
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0])
         this.loadImages(this.IMAGES_WALKING);
@@ -30,6 +33,9 @@ class Chicken extends MovableObject {
         this.animate();
     }
     
+    /**
+     * This function lets the chicken run to the left or lets it die and animates it in the process.
+     */
     animate() {
         setInterval(() => {
             if(this.isDead(this.energy) == false) {this.moveLeft()}

@@ -21,6 +21,13 @@ class ThrowableObject extends MovableObject {
         right: 0
     };
 
+    /**
+     * The constructor loads a bottle that is thrown.
+     * @param {number} x - Coordiate
+     * @param {number} y - Coordiate
+     * @param {number} numberOfBottles - Number of Bottles
+     * @param {boolean} playSounds - Play sound is on or off
+     */
     constructor(x, y, numberOfBottles, playSounds) {
         super().loadImage('../img/7_statusbars/3_icons/icon_salsa_bottle.png');
         this.loadImages(this.IMAGES_SPLASH);
@@ -34,6 +41,9 @@ class ThrowableObject extends MovableObject {
         this.playSound();
     }
 
+    /**
+     * This function is called as soon as the bottle is thrown. It is then animated.
+     */
     animate() {
         setInterval(() => {
             if(this.world.keyboard.D) {
@@ -42,6 +52,9 @@ class ThrowableObject extends MovableObject {
         }, 1000 / 60)
     }
 
+    /**
+     * This function sets the speed and thus the coordinates.
+     */
     throw() {
         this.speedY = 30;
         this.speedX = 20;
@@ -51,6 +64,9 @@ class ThrowableObject extends MovableObject {
         }, 25);
     }
 
+    /**
+     * This function plays a sound as soon as the bottle is thrown.
+     */
     playSound() {
         if(this.playSounds) {
             this.throw_sound.play();

@@ -34,12 +34,12 @@
             <h2>Please turn your device!</h2>
             <img  class="image-turn-device" src="./img/icons/Rotate_mobile_rotate_smartphone_phone.png" alt="turn-your-device">
         </div>
-        <div class="mobile-button-container-top" id="mobile-buttons-top">
+        <div class="mobile-button-container-top d_none" id="mobile-buttons-top">
             <div class="mobile-button-icon" onclick="world.muteAllSounds()">
                 <img id="mute" src="./img/icons/volume-up.svg" alt="mute">
             </div>
         </div>
-        <div class="screen-container" id="start-screen">
+        <div class="screen-container d_flex" id="start-screen">
             <div class="button-container">
                 <div class="start-button-container">
                     <div class="start-screen-button" onclick="startGame()">
@@ -54,7 +54,7 @@
                 </div>
             </div>
         </div>
-        <div class="endscreen-container" id="end-screen">
+        <div class="endscreen-container d_none" id="end-screen">
             <div class="end-button-container">
                 <div class="start-screen-button" id="play-again" onclick="startGame()">
                     Erneut Spielen
@@ -67,7 +67,7 @@
         <canvas width="720" height="480" id="canvas">
 
         </canvas>
-        <div class="mobile-button-container-bottom" id="mobile-buttons-bottom">
+        <div class="mobile-button-container-bottom d_none" id="mobile-buttons-bottom">
             <div class="mobile-button-container-bottom-left">
                 <div class="mobile-button-icon" id="Btnleft">
                     <img src="./img/icons/arrow-left-circle.svg" alt="left">

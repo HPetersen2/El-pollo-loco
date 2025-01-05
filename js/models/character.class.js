@@ -77,6 +77,9 @@ class Character extends MovableObject {
         '../img/2_character_pepe/1_idle/long_idle/I-20.png'
     ];
 
+    /**
+     * The constructor creates the character and loads the respective images. It also starts the intervals for jumping, running and sleeping.
+     */
     constructor() {
         super().loadImage('../img/2_character_pepe/1_idle/idle/I-1.png');
         this.loadImages(this.IMAGES_IDLE);
@@ -90,6 +93,9 @@ class Character extends MovableObject {
         this.sleeping();
     }
 
+    /**
+     * This function animates the character. Running, jumping and sleeping.
+     */
     animate() {
         setInterval(() => {
             this.walking_sound.pause();
@@ -108,6 +114,9 @@ class Character extends MovableObject {
         }, 100);
     }
 
+    /**
+     * This function animates the character to the left.
+     */
     walkLeft() {
         this.wakeUp();
         this.otherDirection = true;
@@ -116,6 +125,9 @@ class Character extends MovableObject {
         this.savePosition();
     }
 
+    /**
+     * This function animates the character to the right.
+     */
     walkRight() {
         this.wakeUp();
         this.moveRight();
@@ -124,11 +136,17 @@ class Character extends MovableObject {
         this.savePosition();
     }
 
+    /**
+     * This function animates the character with a jump.
+     */
     jump() {
         this.wakeUp();
         this.speedY = 30;
     }
 
+    /**
+     * This function checks whether the character is still moving or already asleep.
+     */
     sleeping() {
         setInterval(() => {
             if(this.currentX == this.x) {
@@ -137,20 +155,32 @@ class Character extends MovableObject {
         }, 15000)
     }
 
+    /**
+     * This function encourages the character to sleep.
+     */
     sleeps() {
         this.playAnimation(this.IMAGES_SLEEP);
         this.world.playSound(this.sleeping_sound);
     }
 
+    /**
+     * This function wakes up the character as soon as it moves.
+     */
     wakeUp() {
         this.walking_sound.pause();
         this.sleep = false;
     }
 
+    /**
+     * This function saves the current position of the character to check when it has stopped moving and can fall asleep.
+     */
     savePosition() {
         this.currentX = this.x;
     }
 
+    /**
+     * This function animates the character when it dies.
+     */
     die() {
         this.playAnimation(this.IMAGES_DEAD);
         this.dead = true;

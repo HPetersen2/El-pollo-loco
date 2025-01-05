@@ -52,6 +52,9 @@ class Endboss extends MovableObject {
         '../img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
 
+    /**
+     * The constructor creates the end boss and loads the images for the respective animations and starts the animations.
+     */
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
@@ -63,6 +66,9 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
+    /**
+     * This function encourages the character to attack, sound the alarm and die. It also makes the final boss run to the left.
+     */
     animate() {
         setInterval(() => {
             if(this.energy == 100) {this.playAnimation(this.IMAGES_ALERT)}
@@ -79,14 +85,24 @@ class Endboss extends MovableObject {
         }, 1000);
     }
 
+    /**
+     * This function checks whether the end boss is still alive.
+     * @returns liveStatus
+     */
     live() {
         return this.energy < 100 && this.energy > 0;
     }
 
+    /**
+     * This function plays the animation when the end boss is injured by a bottle.
+     */
     playHurtAnimation() {
         this.playAnimation(this.IMAGES_HURT);   
     }
 
+    /**
+     * This function plays the animation when the final boss dies.
+     */
     died() {
         this.playAnimationForOneTime(this.IMAGES_DEAD);
         setTimeout(() => winGame(), 2000);
