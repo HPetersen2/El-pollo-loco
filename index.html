@@ -30,6 +30,11 @@
 <body onload="init()">
     <h1>El Pollo Loco</h1>
     <div id="fullscreen-container">
+        <div class="mute-container" id="mute-desktop">
+            <div class="mobile-button-icon" onclick="world.togglePlaySoundOnOff()">
+                <img id="mute-desktop-button" src="./img/icons/volume-up.svg" alt="mute">
+            </div> 
+        </div>
         <div class="turn-device-container">
             <h2>Please turn your device!</h2>
             <img  class="image-turn-device" src="./img/icons/Rotate_mobile_rotate_smartphone_phone.png" alt="turn-your-device">

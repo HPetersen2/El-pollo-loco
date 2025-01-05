@@ -2,8 +2,8 @@ class Character extends MovableObject {
     currentX;
     sleep = false;
     dead = false;
-    height = 300;
-    y = 100;
+    height = 270;
+    y = 150;
     world;
     walking_sound = new Audio('audio/running.mp3');
     sleeping_sound = new Audio('audio/sleep.mp3');
@@ -90,6 +90,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_SLEEP);
         this.applyGravity();
         this.animate();
+        this.defaultAnimate();
         this.sleeping();
     }
 
@@ -103,7 +104,7 @@ class Character extends MovableObject {
             if(this.world.keyboard.LEFT && this.x > 0 && !this.dead) {this.walkLeft()};
             if(this.world.keyboard.SPACE && !this.isAboveGround() && !this.dead) {this.jump()};
             this.world.camera_x = -this.x + 100;
-        }, 1000 / 60)
+        }, 1000 / 60);
         setInterval(() => {
             if(this.sleep) {this.sleeps()}
             else if(this.isDead(this.energy)) {this.die()}
@@ -112,6 +113,14 @@ class Character extends MovableObject {
                 if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT && !this.world.keyboard.SPACE) {this.playAnimation(this.IMAGES_WALKING);}
             }
         }, 100);
+    }
+
+    defaultAnimate() {
+        setInterval(() => {
+            if (!this.dead && !this.sleep && !this.isAboveGround() && this.x == this.currentX) {
+                this.playAnimation(this.IMAGES_IDLE);
+            }
+        }, 200);
     }
 
     /**

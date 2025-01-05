@@ -75,5 +75,5 @@ function startLevel1() {
         new Coin()
     ]
 );
-}
 
+}

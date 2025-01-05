@@ -77,12 +77,13 @@ class Endboss extends MovableObject {
         }, 200);
 
         setInterval(() => {
-            if(this.live()) {this.moveLeft()}
-        }, 250);
+            if(this.live() && !this.otherDirection) {this.moveLeft()}
+            if(this.live() && this.otherDirection) {this.moveRight()}
+        }, 60);
 
         setInterval(() => {
             if(this.live()) {this.playAnimation(this.IMAGES_WALKING)}
-        }, 1000);
+        }, 100);
     }
 
     /**

@@ -19,55 +19,16 @@ class Keyboard {
      */
     bindKeyPressEvents() {
         window.addEventListener('keydown', (e) => {
-            if(e.keyCode == 39) {
-                this.RIGHT = true;
-            }
-        
-            if(e.keyCode == 37) {
-                this.LEFT = true;
-            }
-        
-            if(e.keyCode == 38) {
-                this.UP = true;
-            }
-        
-            if(e.keyCode == 40) {
-                this.DOWN = true;
-            }
-        
-            if(e.keyCode == 32) {
-                this.SPACE = true;
-            }
-        
-            if(e.keyCode == 68) {
-                this.D = true;
-            }
+            this.checkKeyRight('keydown', e);
+            this.checkKeyLeft('keydown', e);
+            this.checkKeySpace('keydown', e);
+            this.checkKeyD('keydown', e);
         });
-        
         window.addEventListener('keyup', (e) => {
-            if(e.keyCode == 39) {
-                this.RIGHT = false;
-            }
-        
-            if(e.keyCode == 37) {
-                this.LEFT = false;
-            }
-        
-            if(e.keyCode == 38) {
-                this.UP = false;
-            }
-        
-            if(e.keyCode == 40) {
-                this.DOWN = false;
-            }
-        
-            if(e.keyCode == 32) {
-                this.SPACE = false;
-            }
-        
-            if(e.keyCode == 68) {
-                this.D = false;
-            }
+            this.checkKeyRight('keyup', e);
+            this.checkKeyLeft('keyup', e);
+            this.checkKeySpace('keyup', e);
+            this.checkKeyD('keyup', e);
         });
     }
 
@@ -76,45 +37,138 @@ class Keyboard {
      */
     bindBtnPressEvents() {
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('Btnleft').addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                this.LEFT = true;
-            });
-
-            document.getElementById('Btnleft').addEventListener('touchend', (e) => {
-                e.preventDefault();
-                this.LEFT = false;
-            });
-
-            document.getElementById('Btnright').addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                this.RIGHT = true;
-            });
-
-            document.getElementById('Btnright').addEventListener('touchend', (e) => {
-                e.preventDefault();
-                this.RIGHT = false;
-            });
-
-            document.getElementById('Btnup').addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                this.SPACE = true;
-            });
-
-            document.getElementById('Btnup').addEventListener('touchend', (e) => {
-                e.preventDefault();
-                this.SPACE = false;
-            });
-            
-            document.getElementById('Btnthrow').addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                this.D = true;
-            });
-
-            document.getElementById('Btnthrow').addEventListener('touchend', (e) => {
-                e.preventDefault();
-                this.D = false;
-            });
+            this.checkTouchLeft();
+            this.checkTouchRight();
+            this.checkTouchSpace();
+            this.checkTouchThrow();
         }); 
     }
+
+    /**
+     * This function checks whether the right arrow button has been pressed or released.
+     * @param {string} condition - The status of the button is transferred here.
+     * @param {string} e - event
+     */
+    checkKeyRight(condition, e) {
+        if(condition == 'keydown') {
+            if(e.keyCode == 39) {
+                this.RIGHT = true;
+            }
+        } else {
+            if(e.keyCode == 39) {
+                this.RIGHT = false;
+            }
+        }
+    }
+
+    /**
+     * This function checks whether the left arrow button has been pressed or released.
+     * @param {string} condition - The status of the button is transferred here.
+     * @param {string} e - event
+     */
+    checkKeyLeft(condition, e) {
+        if(condition == 'keydown') {
+            if(e.keyCode == 37) {
+                this.LEFT = true;
+            }
+        } else {
+            if(e.keyCode == 37) {
+                this.LEFT = false;
+            }
+        }
+    }
+
+    /**
+     * This function checks whether the space button has been pressed or released.
+     * @param {string} condition - The status of the button is transferred here.
+     * @param {string} e - event
+     */
+    checkKeySpace(condition, e) {
+        if(condition == 'keydown') {
+            if(e.keyCode == 32) {
+                this.SPACE = true;
+            }
+        } else {
+            if(e.keyCode == 32) {
+                this.SPACE = false;
+            }
+        }
+    }
+
+    /**
+     * This function checks whether the D button has been pressed or released.
+     * @param {string} condition - The status of the button is transferred here.
+     * @param {string} e - event
+     */
+    checkKeyD(condition, e) {
+        if (condition == 'keydown') {
+            if(e.keyCode == 68) {
+                this.D = true;
+            }
+        } else {
+            if(e.keyCode == 68) {
+                this.D = false;
+            }
+        }
+    }
+
+    /**
+     * This function checks whether the button on the left has been pressed on a mobile device.
+     */
+    checkTouchLeft() {
+        document.getElementById('Btnleft').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            this.LEFT = true;
+        }); 
+        document.getElementById('Btnleft').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            this.LEFT = false;
+        });
+    }
+
+    /**
+     * This function checks whether the button on the right has been pressed on a mobile device.
+     */
+    checkTouchRight() {
+        document.getElementById('Btnright').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            this.RIGHT = true;
+        });
+
+        document.getElementById('Btnright').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            this.RIGHT = false;
+        });
+    }
+
+    /**
+     * This function checks whether the button on the Space has been pressed on a mobile device.
+     */
+    checkTouchSpace() {
+        document.getElementById('Btnup').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            this.SPACE = true;
+        });
+
+        document.getElementById('Btnup').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            this.SPACE = false;
+        });
+    }
+
+    /**
+     * This function checks whether the throw button has been pressed on a mobile device.
+     */
+    checkTouchThrow() {
+        document.getElementById('Btnthrow').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            this.D = true;
+        });
+
+        document.getElementById('Btnthrow').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            this.D = false;
+        });
+    }
+
 }

@@ -14,9 +14,10 @@ function init() {
     canvas = document.getElementById('canvas');
     startScreen = document.getElementById('start-screen');
     endScreen = document.getElementById('end-screen');
+    muteButton = document.getElementById('mute-desktop');
     mobileButtonsTop = document.getElementById('mobile-buttons-top');
     mobileButtonsBottom = document.getElementById('mobile-buttons-bottom');
-    gameCondition(canvas, startScreen, endScreen, mobileButtonsTop, mobileButtonsBottom);
+    gameCondition(canvas, startScreen, endScreen, mobileButtonsTop, mobileButtonsBottom, muteButton);
     checkOrientation();
 }
 
@@ -26,10 +27,6 @@ function init() {
  */
 function getDeviceType() {
     let width = window.innerWidth;
-    // if(window.matchMedia("Orientation: portrait").matches) {
-    //     return "Hochformat";
-    // } else if(window.matchMedia("Orientaion: landscape").matches){
-
     if (width <= 720) {
         return true;
         } else {
@@ -53,16 +50,16 @@ function initLevel(level) {
  * @param {string} mobileButtonsTop 
  * @param {string} mobileButtonsBottom 
  */
-function gameCondition(canvas, startScreen, endScreen, mobileButtonsTop, mobileButtonsBottom) {
+function gameCondition(canvas, startScreen, endScreen, mobileButtonsTop, mobileButtonsBottom, muteButton) {
     clearAllIntervals();
     if (isGameStarted) {
         initLevel(1);
         world = new World(canvas, keyboard, isGameStarted);
-        disabledStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsBottom);
+        disabledStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsBottom, muteButton);
     } else if(!isGameStarted && !gameWon && !gameLose) {
-        enableStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsBottom);
+        enableStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsBottom, muteButton);
     } else if(!isGameStarted && gameLose || gameWon) {
-        renderEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobileButtonsBottom);
+        renderEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobileButtonsBottom, muteButton);
     }
 }
 
@@ -73,12 +70,15 @@ function gameCondition(canvas, startScreen, endScreen, mobileButtonsTop, mobileB
  * @param {string} mobileButtonsTop 
  * @param {string} mobileButtonsBottom 
  */
-function disabledStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsBottom) {
+function disabledStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsBottom, muteButton) {
     canvas.classList.remove('d_none');
     canvas.classList.add('d_flex');
+    muteButton.classList.remove('d_none');
+    muteButton.classList.add('d_flex');
     startScreen.classList.remove('d_flex');
     startScreen.classList.add('d_none');
     if(getDeviceType()) {
+        muteButton.classList.add('d_none');
         mobileButtonsTop.classList.remove('d_none');
         mobileButtonsTop.classList.add('d_flex');
         mobileButtonsBottom.classList.remove('d_none');
@@ -93,12 +93,15 @@ function disabledStartScreen(canvas, startScreen, mobileButtonsTop, mobileButton
  * @param {string} mobileButtonsTop 
  * @param {string} mobileButtonsBottom 
  */
-function enableStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsBottom) {
+function enableStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsBottom, muteButton) {
     canvas.classList.remove('d_flex');
     canvas.classList.add('d_none');
+    muteButton.classList.remove('d_flex');
+    muteButton.classList.add('d_none');
     startScreen.classList.remove('d_none');
     startScreen.classList.add('d_flex');
     if(getDeviceType()) {
+        muteButton.classList.add('d_none');
         mobileButtonsTop.classList.remove('d_flex');
         mobileButtonsTop.classList.add('d_none');
         mobileButtonsBottom.classList.remove('d_flex');
@@ -114,13 +117,15 @@ function enableStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsB
  * @param {string} mobileButtonsTop 
  * @param {string} mobileButtonsBottom 
  */
-function enableEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobileButtonsBottom) {
+function enableEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobileButtonsBottom, muteButton) {
     canvas.classList.remove('d_flex');
     canvas.classList.add('d_none');
     startScreen.classList.remove('d_flex');
     startScreen.classList.add('d_none');
     endScreen.classList.remove('d_none');
     endScreen.classList.add('d_flex');
+    muteButton.classList.remove('d_flex');
+    muteButton.classList.add('d_none');
     mobileButtonsTop.classList.remove('d_flex');
     mobileButtonsTop.classList.add('d_none');
     mobileButtonsBottom.classList.remove('d_flex');
@@ -135,7 +140,7 @@ function enableEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobil
  * @param {string} mobileButtonsTop 
  * @param {string} mobileButtonsBottom 
  */
-function renderEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobileButtonsBottom) {
+function renderEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobileButtonsBottom, muteButton) {
     let wonPfad = './img/9_intro_outro_screens/you_won_screen.png';
     let losePfad = './img/9_intro_outro_screens/game_over_screen.png';
     let pfad;
@@ -144,8 +149,8 @@ function renderEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobil
     } else if(gameLose) {
         pfad = losePfad;
     }
-    disabledStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsBottom);
-    enableEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobileButtonsBottom);
+    disabledStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsBottom, muteButton);
+    enableEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobileButtonsBottom, muteButton);
     endScreen.style.backgroundImage = `url('${pfad}')`;
 }
 
@@ -271,6 +276,9 @@ function exitFullscreen(element) {
     }
 }
 
+/**
+ * This function checks the browser and aligns the canvas correctly accordingly.
+ */
 function checkOrientation() {
     if (window.matchMedia("(orientation: landscape)").matches) {
         if (window.innerHeight < 480) {

@@ -29,10 +29,11 @@ class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.isGameStarted = isGameStarted;
-        // this.playGameSound();
+        this.playGameSound();
         this.draw();
         this.setWorld();
         this.run();
+        this.isPlaySoundsOn();
     }
 
     /**
@@ -52,7 +53,8 @@ class World {
         }, 200);
 
         setInterval(() => {
-            this.checkCollisionEndbossWithBottle();
+            this.checkCollisionEnemyWithCharacterTop();
+            this.meetCharcterEndboss();
         }, 15);
     }
 
@@ -86,6 +88,7 @@ class World {
     checkCollisionCharacterWithEnemy() {
         this.level.enemies.forEach((enemy) => {
             if(this.character.isColliding(enemy) && enemy.energy > 0) {
+                this.character.wakeUp();
                 this.playSound(this.hurt_sound);
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
@@ -145,15 +148,14 @@ class World {
     }
 
     /**
-     * This function checks a collision with a bottle and the final boss.
+     * This function checks a collision with a character from top the enemy.
      */
-    checkCollisionEndbossWithBottle() {
-        this.level.enemies.forEach((enemy, index) => {
-            if(this.character.isColliding(enemy) && this.character.speedY > 20 && enemy.constructor.name != 'Endboss') {
+    checkCollisionEnemyWithCharacterTop() {
+        this.level.enemies.forEach((enemy) => {
+            if(this.character.isColliding(enemy) && this.character.speedY > 0 && enemy.speedY == 0 && enemy.constructor.name != 'Endboss') {
                 if(!this.keyboard.SPACE) {
                     this.playSound(this.dead_chicken_sound);
                     enemy.energy = 0;
-                    // setTimeout(() => this.level.enemies.splice(index, 1), 1000)
                 }
             }
         });
@@ -170,6 +172,7 @@ class World {
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0); // Back
         this.addToMap(this.statusBar);
@@ -177,7 +180,6 @@ class World {
         this.addToMap(this.statusBarCoins);
         this.addToMap(this.statusBarBottles);
         this.ctx.translate(this.camera_x, 0); // Forwards
-        this.addObjectsToMap(this.level.enemies);
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
         requestAnimationFrame(function() {
@@ -240,19 +242,36 @@ class World {
         }
     }
 
-    // playGameSound() {
-    //     setInterval(() => {
-    //         if(this.playSounds && isGameStarted) {
-    //             this.game_sound.play();
-    //         }
-    //     }, 20);
-    // }
+    /**
+     * This function play background sound in the game.
+     */
+    playGameSound() {
+        setInterval(() => {
+            if(this.playSounds && isGameStarted) {
+                this.game_sound.play();
+            }
+        }, 20);
+    }
+
+    /**
+     * This function switches the sound on or off.
+     */
+    togglePlaySoundOnOff() {
+        let muteButtonRef = document.getElementById('mute-desktop-button');
+        if(this.playSounds) {
+            this.playSounds = false;
+            muteButtonRef.src = './img/icons/volume-mute.svg'
+        } else if(!this.playSounds) {
+            this.playSounds = true;
+            muteButtonRef.src = './img/icons/volume-up.svg'
+        }
+    }
 
     /**
      * This function mutes all sounds.
      */
     muteAllSounds() {
-        let refMuteIcon = document.getElementById('mute')
+        let refMuteIcon = document.getElementById('mute');
         if(refMuteIcon.getAttribute("src") == './img/icons/volume-up.svg') {
             refMuteIcon.setAttribute("src", "./img/icons/volume-mute.svg");
             this.playSounds = false;
@@ -260,6 +279,33 @@ class World {
             refMuteIcon.setAttribute("src", "./img/icons/volume-up.svg");
             this.playSounds = true;
         }
+    }
+
+    /**
+     * This function checks whether the sound is switched on.
+     */
+    isPlaySoundsOn() {
+        let refMuteIcon = document.getElementById('mute');
+        if(this.playSounds) {
+            refMuteIcon.setAttribute("src", "./img/icons/volume-up.svg");
+        } else {
+            refMuteIcon.setAttribute("src", "./img/icons/volume-mute.svg");
+        }
+    }
+
+    /**
+     * This function checks whether the character is behind the enboss. Then the direction is changed.
+     */
+    meetCharcterEndboss() {
+        this.level.enemies.forEach((enemy) => {
+            if(enemy instanceof Endboss) {
+                if(enemy.x <= this.character.x && !enemy.otherDirection && this.character.energy > 0) {
+                    enemy.otherDirection = true;
+                } else if(enemy.x >= this.character.x && enemy.otherDirection && this.character.energy > 0) {
+                    enemy.otherDirection = false;
+                }
+            }
+        })
     }
 
 }

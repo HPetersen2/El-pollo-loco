@@ -98,9 +98,14 @@ h2 {
         display: none;
     }
 
-        .mobile-button-container-top {
+    .endscreen-container {
         display: none;
     }
+
+    .mute-container {
+        display: none;
+    }
+
 }
 
 /* Querformat bei schmalen Bildschirmen */
@@ -148,6 +153,15 @@ h2 {
     .button-container {
         margin-top: 12px !important;
     }
+
+    .mute-container {
+        display: none;
+    }
+
+}
+
+.mute-container {
+    margin-bottom: 24px;
 }
 
 .screen-container {
