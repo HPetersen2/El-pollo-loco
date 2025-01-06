@@ -193,7 +193,7 @@ class Character extends MovableObject {
     die() {
         this.playAnimation(this.IMAGES_DEAD);
         this.dead = true;
-        setTimeout(() => loseGame(), 2000);
+        setTimeout(() => loseGame(this.world.playSounds), 2000);
     }
 
 }

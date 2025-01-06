@@ -76,8 +76,8 @@ class World {
      * This function calls up all collision functions.
      */
     checkCollisions() {
-        this.checkCollisionCharacterWithEnemy();
         this.checkCollisionEnemyWithBottle();
+        this.checkCollisionCharacterWithEnemy();
         this.checkCollisionBottle();
         this.checkCollisionCoin();
     }
@@ -103,15 +103,14 @@ class World {
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
                 if(bottle.isColliding(enemy) && enemy.energy > 0) {
+                    bottle.playAnimation(bottle.IMAGES_SPLASH);
                     this.playSound(this.dead_chicken_sound);
                     if(enemy.constructor.name == 'Chicken' || enemy.constructor.name == 'SmallChicken') {
                         enemy.energy = 0;
-                        bottle.playAnimation(bottle.IMAGES_SPLASH);
                     } else if(enemy.constructor.name == 'Endboss') {
-                        enemy.energy -= 10;
-                        this.statusBarEndboss.setPercentage(enemy.energy);
-                        bottle.playAnimation(bottle.IMAGES_SPLASH);
                         enemy.playHurtAnimation();
+                        enemy.energy -= 15;
+                        this.statusBarEndboss.setPercentage(enemy.energy);
                     }
                 }
             })
@@ -152,12 +151,13 @@ class World {
      */
     checkCollisionEnemyWithCharacterTop() {
         this.level.enemies.forEach((enemy) => {
-            if(this.character.isColliding(enemy) && this.character.speedY > 0 && enemy.speedY == 0 && enemy.constructor.name != 'Endboss') {
-                if(!this.keyboard.SPACE) {
+            if(this.character.isColliding(enemy)) {
+                if(this.character.speedY < 0 && this.character.isAboveGround() && enemy.constructor.name != 'Endboss') {
                     this.playSound(this.dead_chicken_sound);
                     enemy.energy = 0;
                 }
             }
+
         });
     }
 

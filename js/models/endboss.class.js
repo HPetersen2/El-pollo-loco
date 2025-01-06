@@ -73,7 +73,7 @@ class Endboss extends MovableObject {
         setInterval(() => {
             if(this.energy == 100) {this.playAnimation(this.IMAGES_ALERT)}
             if(this.energy < 100) {this.playAnimation(this.IMAGES_ATTACK)}
-            if(this.energy == 0) {this.died()}
+            if(this.energy <= 0) {this.died()}
         }, 200);
 
         setInterval(() => {

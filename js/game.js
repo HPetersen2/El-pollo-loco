@@ -56,6 +56,7 @@ function gameCondition(canvas, startScreen, endScreen, mobileButtonsTop, mobileB
         initLevel(1);
         world = new World(canvas, keyboard, isGameStarted);
         disabledStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsBottom, muteButton);
+        document.getElementById('mute-desktop-button').setAttribute('src', './img/icons/volume-up.svg');
     } else if(!isGameStarted && !gameWon && !gameLose) {
         enableStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsBottom, muteButton);
     } else if(!isGameStarted && gameLose || gameWon) {
@@ -181,9 +182,11 @@ function stopGame() {
  */
 function winGame() {
     world.level.enemies.forEach((enemy) => {
-        if(enemy instanceof Endboss && enemy.energy == 0 && world.character.energy > 0) {
+        if(enemy instanceof Endboss && enemy.energy < 0 && world.character.energy > 0) {
             gameWon = true;
-            win_sound.play();
+            if(checkPlayGameSound()) {
+                win_sound.play();
+            }
             stopGame();
         }
     });
@@ -194,8 +197,11 @@ function winGame() {
  */
 function loseGame() {
     gameLose = true;
-    lose_sound.play();
+    if(checkPlayGameSound()) {
+        lose_sound.play();
+    } 
     stopGame();
+
 }
 
 /**
@@ -288,5 +294,19 @@ function checkOrientation() {
     }
     else {
         document.getElementById('canvas').style.height = `100%`;
+    }
+}
+
+/**
+ * This function checks whether the sound is switched on or off.
+ * @returns playSound on or off
+ */
+function checkPlayGameSound() {
+    if(getDeviceType()) {
+        if(document.getElementById('mute').getAttribute('src') == './img/icons/volume-up.svg') {return true;}    
+        if(document.getElementById('mute').getAttribute('src') == './img/icons/volume-mute.svg') {return false;}
+    } else if(!getDeviceType()) {
+        if(document.getElementById('mute-desktop-button').getAttribute('src') == './img/icons/volume-up.svg') {return true;}    
+        if(document.getElementById('mute-desktop-button').getAttribute('src') == './img/icons/volume-mute.svg') {return false;}
     }
 }
