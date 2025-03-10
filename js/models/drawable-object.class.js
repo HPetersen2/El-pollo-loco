@@ -21,7 +21,13 @@ class DrawableObject {
      * @param {string} ctx - This parameter transfers the reference to the canvas.
      */
     draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        try {
+            ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        } catch(e) {
+            console.warn(e);
+            console.log(this.img.src);
+        }
+
     }
 
     /**

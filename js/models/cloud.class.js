@@ -8,7 +8,7 @@ class Cloud extends MovableObject {
      * @param {number} x - The coordinate where the cloud is inserted but the x-coordinate.
      */
     constructor(x) {
-        super().loadImage('../img/5_background/layers/4_clouds/1.png');
+        super().loadImage('img/5_background/layers/4_clouds/1.png');
         this.x = Math.random() * x;
         this.animate();
     }

@@ -6,12 +6,12 @@ class ThrowableObject extends MovableObject {
     throw_sound = new Audio('audio/throw.mp3');
 
     IMAGES_SPLASH = [
-        '../img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
-        '../img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
-        '../img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
-        '../img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
-        '../img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
-        '../img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
     ];
 
     offset = {
@@ -29,7 +29,7 @@ class ThrowableObject extends MovableObject {
      * @param {boolean} playSounds - Play sound is on or off
      */
     constructor(x, y, numberOfBottles, playSounds) {
-        super().loadImage('../img/7_statusbars/3_icons/icon_salsa_bottle.png');
+        super().loadImage('img/7_statusbars/3_icons/icon_salsa_bottle.png');
         this.loadImages(this.IMAGES_SPLASH);
         this.x = x;
         this.y = y;

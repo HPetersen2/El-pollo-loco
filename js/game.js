@@ -4,8 +4,8 @@ let keyboard = new Keyboard();
 let isGameStarted = false;
 let gameWon = false;
 let gameLose = false;
-let win_sound = new Audio('./audio/win.mp3');
-let lose_sound = new Audio('./audio/lose.mp3');
+let win_sound = new Audio('audio/win.mp3');
+let lose_sound = new Audio('audio/lose.mp3');
 
 /**
  * This function is called at the start of the game.
@@ -56,7 +56,7 @@ function gameCondition(canvas, startScreen, endScreen, mobileButtonsTop, mobileB
         initLevel(1);
         world = new World(canvas, keyboard, isGameStarted);
         disabledStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsBottom, muteButton);
-        document.getElementById('mute-desktop-button').setAttribute('src', './img/icons/volume-up.svg');
+        document.getElementById('mute-desktop-button').setAttribute('src', 'img/icons/volume-up.svg');
     } else if(!isGameStarted && !gameWon && !gameLose) {
         enableStartScreen(canvas, startScreen, mobileButtonsTop, mobileButtonsBottom, muteButton);
     } else if(!isGameStarted && gameLose || gameWon) {
@@ -142,8 +142,8 @@ function enableEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobil
  * @param {string} mobileButtonsBottom 
  */
 function renderEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobileButtonsBottom, muteButton) {
-    let wonPfad = './img/9_intro_outro_screens/you_won_screen.png';
-    let losePfad = './img/9_intro_outro_screens/game_over_screen.png';
+    let wonPfad = 'img/9_intro_outro_screens/you_won_screen.png';
+    let losePfad = 'img/9_intro_outro_screens/game_over_screen.png';
     let pfad;
     if(gameWon) {
         pfad = wonPfad;
@@ -303,10 +303,10 @@ function checkOrientation() {
  */
 function checkPlayGameSound() {
     if(getDeviceType()) {
-        if(document.getElementById('mute').getAttribute('src') == './img/icons/volume-up.svg') {return true;}    
-        if(document.getElementById('mute').getAttribute('src') == './img/icons/volume-mute.svg') {return false;}
+        if(document.getElementById('mute').getAttribute('src') == 'img/icons/volume-up.svg') {return true;}    
+        if(document.getElementById('mute').getAttribute('src') == 'img/icons/volume-mute.svg') {return false;}
     } else if(!getDeviceType()) {
-        if(document.getElementById('mute-desktop-button').getAttribute('src') == './img/icons/volume-up.svg') {return true;}    
-        if(document.getElementById('mute-desktop-button').getAttribute('src') == './img/icons/volume-mute.svg') {return false;}
+        if(document.getElementById('mute-desktop-button').getAttribute('src') == 'img/icons/volume-up.svg') {return true;}    
+        if(document.getElementById('mute-desktop-button').getAttribute('src') == 'img/icons/volume-mute.svg') {return false;}
     }
 }
