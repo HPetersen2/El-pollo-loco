@@ -19,6 +19,7 @@ function init() {
     mobileButtonsBottom = document.getElementById('mobile-buttons-bottom');
     gameCondition(canvas, startScreen, endScreen, mobileButtonsTop, mobileButtonsBottom, muteButton);
     checkOrientation();
+    checkChangeInPortrait();
 }
 
 /**
@@ -302,6 +303,24 @@ function checkOrientation() {
     else {
         document.getElementById('canvas').style.height = `100%`;
     }
+}
+
+/**
+ * This function checked whether the mode portrait is and deactivated the buttons.
+ */
+function checkChangeInPortrait() {
+    setInterval(() => {
+        if(window.matchMedia("(orientation: portrait)").matches) {
+            if(isGameStarted) {
+                document.getElementById('mobile-buttons-top').classList.remove('d_flex');
+                document.getElementById('mobile-buttons-top').classList.add('d_none');
+                document.getElementById('mobile-buttons-bottom').classList.remove('d_flex');
+                document.getElementById('mobile-buttons-bottom').classList.add('d_none');
+            }
+        } else if (window.matchMedia("(orientation: landscape)").matches){
+            checkOrientation();
+        }
+    }, 100)
 }
 
 /**
