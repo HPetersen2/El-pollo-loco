@@ -236,9 +236,17 @@ class World {
      * This function plays a sound.
      * @param {string} sound 
      */
-    async playSound(sound) {
+    playSound(sound) {
         if(this.playSounds) {
-            await sound.play();
+            let playPromise =  sound.play();
+            if(playPromise != undefined) {
+                playPromise.then(_ => {
+
+                })
+                .catch(error => {
+              
+                })
+            }
         }
     }
 
