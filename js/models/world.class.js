@@ -11,11 +11,11 @@ class World {
     statusBarBottles = new StatusBarBottles();
     throwableObjects = [];
     playSounds = true;
-    game_sound = new Audio('./audio/el_pollo_loco.mp3');
-    collecting_coin_sound = new Audio('./audio/collect.mp3');
-    collecting_bottle_sound = new Audio('./audio/bottle.mp3');
-    hurt_sound = new Audio('./audio/hurt.mp3');
-    dead_chicken_sound = new Audio('./audio/chicken-dead.mp3');
+    game_sound = new Audio('audio/el_pollo_loco.mp3');
+    collecting_coin_sound = new Audio('audio/collect.mp3');
+    collecting_bottle_sound = new Audio('audio/bottle.mp3');
+    hurt_sound = new Audio('audio/hurt.mp3');
+    dead_chicken_sound = new Audio('audio/chicken-dead.mp3');
     isGameStarted;
 
     /**
@@ -268,10 +268,10 @@ class World {
         let muteButtonRef = document.getElementById('mute-desktop-button');
         if(this.playSounds) {
             this.playSounds = false;
-            muteButtonRef.src = './img/icons/volume-mute.svg'
+            muteButtonRef.src = 'img/icons/volume-mute.svg'
         } else if(!this.playSounds) {
             this.playSounds = true;
-            muteButtonRef.src = './img/icons/volume-up.svg'
+            muteButtonRef.src = 'img/icons/volume-up.svg'
         }
     }
 
@@ -280,11 +280,11 @@ class World {
      */
     muteAllSounds() {
         let refMuteIcon = document.getElementById('mute');
-        if(refMuteIcon.getAttribute("src") == './img/icons/volume-up.svg') {
-            refMuteIcon.setAttribute("src", "./img/icons/volume-mute.svg");
+        if(refMuteIcon.getAttribute("src") == 'img/icons/volume-up.svg') {
+            refMuteIcon.setAttribute("src", "img/icons/volume-mute.svg");
             this.playSounds = false;
-        } else if(refMuteIcon.getAttribute("src") == './img/icons/volume-mute.svg') {
-            refMuteIcon.setAttribute("src", "./img/icons/volume-up.svg");
+        } else if(refMuteIcon.getAttribute("src") == 'img/icons/volume-mute.svg') {
+            refMuteIcon.setAttribute("src", "img/icons/volume-up.svg");
             this.playSounds = true;
         }
     }
@@ -295,9 +295,9 @@ class World {
     isPlaySoundsOn() {
         let refMuteIcon = document.getElementById('mute');
         if(this.playSounds) {
-            refMuteIcon.setAttribute("src", "./img/icons/volume-up.svg");
+            refMuteIcon.setAttribute("src", "img/icons/volume-up.svg");
         } else {
-            refMuteIcon.setAttribute("src", "./img/icons/volume-mute.svg");
+            refMuteIcon.setAttribute("src", "img/icons/volume-mute.svg");
         }
     }
 
