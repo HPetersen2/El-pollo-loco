@@ -160,6 +160,7 @@ function renderEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobil
  */
 function startGame() {
     isGameStarted = true;
+    checkOrientation();
     if(gameLose || gameWon) {
         gameLose = false;
         gameWon = false;
@@ -290,6 +291,12 @@ function checkOrientation() {
         if (window.innerHeight < 480) {
             newHeight = window.innerHeight;
             document.getElementById('canvas').style.height = `${newHeight}px`;
+            if(isGameStarted) {
+                document.getElementById('mobile-buttons-top').classList.remove('d_none');
+                document.getElementById('mobile-buttons-top').classList.add('d_flex');
+                document.getElementById('mobile-buttons-bottom').classList.remove('d_none');
+                document.getElementById('mobile-buttons-bottom').classList.add('d_flex');
+            }
         }
     }
     else {
