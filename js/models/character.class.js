@@ -106,13 +106,13 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
         setInterval(() => {
-            if(this.sleep) {this.sleeps()}
-            else if(this.isDead(this.energy)) {this.die()}
+            if(this.sleep) {this.sleeps();}
+            else if(this.isDead(this.energy)) {this.die();}
             else if(this.isHurt()) {this.playAnimation(this.IMAGES_HURT);}
             else if(this.isAboveGround()) {this.playAnimation(this.IMAGES_JUMPING);} else {
                 if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT && !this.world.keyboard.SPACE) {this.playAnimation(this.IMAGES_WALKING);}
             }
-        }, 100);
+        }, 60);
     }
 
     defaultAnimate() {
@@ -120,7 +120,7 @@ class Character extends MovableObject {
             if (!this.dead && !this.sleep && !this.isAboveGround() && this.x == this.currentX) {
                 this.playAnimation(this.IMAGES_IDLE);
             }
-        }, 100);
+        }, 60);
     }
 
     /**
