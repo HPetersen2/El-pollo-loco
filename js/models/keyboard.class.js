@@ -36,7 +36,7 @@ class Keyboard {
      * This function checks whether the respective buttons have been pressed on the mobile device.
      */
     bindBtnPressEvents() {
-        document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('load', () => {
             this.checkTouchLeft();
             this.checkTouchRight();
             this.checkTouchSpace();
@@ -119,7 +119,7 @@ class Keyboard {
         document.getElementById('Btnleft').addEventListener('touchstart', (e) => {
             e.preventDefault();
             this.LEFT = true;
-        }); 
+        }, {passive:false}); 
         document.getElementById('Btnleft').addEventListener('touchend', (e) => {
             e.preventDefault();
             this.LEFT = false;
@@ -133,7 +133,7 @@ class Keyboard {
         document.getElementById('Btnright').addEventListener('touchstart', (e) => {
             e.preventDefault();
             this.RIGHT = true;
-        });
+        }, {passive:false});
 
         document.getElementById('Btnright').addEventListener('touchend', (e) => {
             e.preventDefault();
@@ -148,7 +148,7 @@ class Keyboard {
         document.getElementById('Btnup').addEventListener('touchstart', (e) => {
             e.preventDefault();
             this.SPACE = true;
-        });
+        }, {passive:false});
 
         document.getElementById('Btnup').addEventListener('touchend', (e) => {
             e.preventDefault();
@@ -163,7 +163,7 @@ class Keyboard {
         document.getElementById('Btnthrow').addEventListener('touchstart', (e) => {
             e.preventDefault();
             this.D = true;
-        });
+        }, {passive:false});
 
         document.getElementById('Btnthrow').addEventListener('touchend', (e) => {
             e.preventDefault();

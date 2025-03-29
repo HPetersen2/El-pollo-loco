@@ -3,6 +3,14 @@
     src: url('./fonts/Zabars.ttf') format('truetype');
 }
 
+img {
+    -webkit-user-drag: none;  /* Verhindert das Ziehen von Bildern */
+    user-select: none; /* Verhindert das Auswählen von Bildern */
+    -webkit-user-select: none; /* Safari and older Chrome versions */
+    -moz-user-select: none;    /* Older Firefox versions */
+    -ms-user-select: none;     /* Internet Explorer / Edge */
+}
+
 a {
     text-decoration: none;
     color: black;

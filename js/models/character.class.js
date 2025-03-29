@@ -120,7 +120,7 @@ class Character extends MovableObject {
             if (!this.dead && !this.sleep && !this.isAboveGround() && this.x == this.currentX) {
                 this.playAnimation(this.IMAGES_IDLE);
             }
-        }, 200);
+        }, 100);
     }
 
     /**
