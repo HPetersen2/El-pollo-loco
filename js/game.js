@@ -276,7 +276,7 @@ function enterFullscreen(element) {
 /**
  * This function ends full screen mode.
  */
-function exitFullscreen(element) {
+function exitFullscreen() {
     if(document.exitFullscreen) {
         document.exitFullscreen();
     } else if(document.webkitExitFullscreen) {
@@ -292,6 +292,7 @@ function checkOrientation() {
         if (window.innerHeight < 480) {
             newHeight = window.innerHeight;
             document.getElementById('canvas').style.height = `${newHeight}px`;
+            startFullscreen();
             if(isGameStarted) {
                 document.getElementById('mobile-buttons-top').classList.remove('d_none');
                 document.getElementById('mobile-buttons-top').classList.add('d_flex');
@@ -312,6 +313,7 @@ function checkChangeInPortrait() {
     setInterval(() => {
         if(window.matchMedia("(orientation: portrait)").matches) {
             if(isGameStarted) {
+                exitFullscreen();
                 document.getElementById('mobile-buttons-top').classList.remove('d_flex');
                 document.getElementById('mobile-buttons-top').classList.add('d_none');
                 document.getElementById('mobile-buttons-bottom').classList.remove('d_flex');
