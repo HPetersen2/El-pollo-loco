@@ -29,23 +29,23 @@
 </head>
 <body onload="init()">
     <h1>El Pollo Loco</h1>
-    <div id="fullscreen-container">
-        <div class="mute-container" id="mute-desktop">
+    <section id="fullscreen-container">
+        <nav class="mute-container" id="mute-desktop">
             <div class="mobile-button-icon" onclick="world.togglePlaySoundOnOff()">
                 <button><img id="mute-desktop-button" src="./img/icons/volume-up.svg" alt="mute"></button>
             </div> 
-        </div>
-        <div class="turn-device-container">
+        </nav>
+        <nav class="turn-device-container">
             <h2>Please turn your device!</h2>
             <img class="image-turn-device" src="./img/icons/Rotate_mobile_rotate_smartphone_phone.png" alt="turn-your-device">
-        </div>
-        <div class="mobile-button-container-top d_none" id="mobile-buttons-top">
+        </nav>
+        <nav class="mobile-button-container-top d_none" id="mobile-buttons-top">
             <div class="mobile-button-icon" onclick="world.muteAllSounds()">
                 <button><img id="mute" src="./img/icons/volume-up.svg" alt="mute"></button>
             </div>
-        </div>
-        <div class="screen-container d_flex" id="start-screen">
-            <div class="button-container">
+        </nav>
+        <section class="screen-container d_flex" id="start-screen">
+            <nav class="button-container">
                 <div class="start-button-container">
                     <div class="start-screen-button" onclick="startGame()">
                         Start
@@ -57,9 +57,9 @@
                 <div class="legal-notice-container">
                     <a target="_blank" href="./legal_notice.html">Impressum & Datenschutz</a>
                 </div>
-            </div>
-        </div>
-        <div class="endscreen-container d_none" id="end-screen">
+            </nav>
+        </section>
+        <section class="endscreen-container d_none" id="end-screen">
             <div class="end-button-container">
                 <div class="start-screen-button" id="play-again" onclick="startGame()">
                     Erneut Spielen
@@ -68,11 +68,11 @@
                     Zurück zum Start
                 </div>
             </div>
-        </div>
+        </section>
         <canvas width="720" height="480" id="canvas">
 
         </canvas>
-        <div class="mobile-button-container-bottom d_none" id="mobile-buttons-bottom">
+        <nav class="mobile-button-container-bottom d_none" id="mobile-buttons-bottom">
             <div class="mobile-button-container-bottom-left">
                 <div class="mobile-button-icon" id="Btnleft">
                     <button><img src="./img/icons/arrow-left-circle.svg" alt="left"></button>
@@ -89,10 +89,10 @@
                     <button><img src="./img/icons/heart-arrow.svg" alt="throw"></button>
                 </div>
             </div>
-        </div>
-    </div>
-    <div id="overlay" class="overlay" onclick="handleOverlayClick(event)">
-        <div class="overlay-content">
+        </nav>
+    </section>
+    <section id="overlay" class="overlay" onclick="handleOverlayClick(event)">
+        <article class="overlay-content">
             <div class="overlay-header">
                 <h2>Spielanleitung</h2>
                 <button class="close-btn" id="closeOverlay" onclick="toggleOverlay()">&times;</button>
@@ -102,7 +102,7 @@
                 <p><span>D</span>: Werfen</p>
                 <p><span>Leertaste</span>: Springen</p>
             </div>
-        </div>
-    </div>
+        </article>
+    </section>
 </body>
 </html>
