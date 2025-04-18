@@ -161,10 +161,7 @@ function renderEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobil
  */
 function startGame() {
     isGameStarted = true;
-    let orientation = checkOrientation();
-    if(orientation) {
-        startFullscreen();
-    }
+    checkOrientation();
     if(gameLose || gameWon) {
         gameLose = false;
         gameWon = false;
@@ -295,7 +292,6 @@ function checkOrientation() {
         if (window.innerHeight < 480) {
             newHeight = window.innerHeight;
             document.getElementById('canvas').style.height = `${newHeight}px`;
-            startFullscreen();
             if(isGameStarted) {
                 document.getElementById('mobile-buttons-top').classList.remove('d_none');
                 document.getElementById('mobile-buttons-top').classList.add('d_flex');
@@ -316,7 +312,6 @@ function checkChangeInPortrait() {
     setInterval(() => {
         if(window.matchMedia("(orientation: portrait)").matches) {
             if(isGameStarted) {
-                exitFullscreen();
                 document.getElementById('mobile-buttons-top').classList.remove('d_flex');
                 document.getElementById('mobile-buttons-top').classList.add('d_none');
                 document.getElementById('mobile-buttons-bottom').classList.remove('d_flex');
