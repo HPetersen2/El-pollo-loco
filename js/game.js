@@ -161,7 +161,10 @@ function renderEndScreen(canvas, startScreen, endScreen, mobileButtonsTop, mobil
  */
 function startGame() {
     isGameStarted = true;
-    checkOrientation();
+    let orientation = checkOrientation();
+    if(orientation) {
+        startFullscreen();
+    }
     if(gameLose || gameWon) {
         gameLose = false;
         gameWon = false;
