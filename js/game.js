@@ -306,21 +306,23 @@ function checkOrientation() {
 }
 
 /**
- * This function checked whether the mode portrait is and deactivated the buttons.
+ * This function checks whether the mode is portrait and deactivates the buttons.
  */
 function checkChangeInPortrait() {
-    setInterval(() => {
-        if(window.matchMedia("(orientation: portrait)").matches) {
-            if(isGameStarted) {
+    function loop() {
+        if (window.matchMedia("(orientation: portrait)").matches) {
+            if (isGameStarted) {
                 document.getElementById('mobile-buttons-top').classList.remove('d_flex');
                 document.getElementById('mobile-buttons-top').classList.add('d_none');
                 document.getElementById('mobile-buttons-bottom').classList.remove('d_flex');
                 document.getElementById('mobile-buttons-bottom').classList.add('d_none');
             }
-        } else if (window.matchMedia("(orientation: landscape)").matches){
+        } else if (window.matchMedia("(orientation: landscape)").matches) {
             checkOrientation();
         }
-    }, 100)
+        requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
 }
 
 /**

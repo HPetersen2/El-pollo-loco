@@ -37,16 +37,26 @@ class Chicken extends MovableObject {
      * This function lets the chicken run to the left or lets it die and animates it in the process.
      */
     animate() {
-        setInterval(() => {
-            if(this.isDead(this.energy) == false) {this.moveLeft()}
-        }, 1000 / 60);
-
-        setInterval(() => {
-            if(this.isDead(this.energy) == false) {
-                this.playAnimation(this.IMAGES_WALKING);
-            } else if (this.isDead(this.energy)) {
-                this.playAnimation(this.IMAGES_DEAD);
+        let lastMoveFrame = 0;
+        let lastAnimFrame = 0;
+        const loop = (timestamp) => {
+            if (timestamp - lastMoveFrame > 1000 / 60) {
+                if (!this.isDead(this.energy)) {
+                    this.moveLeft();
+                }
+                lastMoveFrame = timestamp;
             }
-        }, 200);
+            if (timestamp - lastAnimFrame > 200) {
+                if (!this.isDead(this.energy)) {
+                    this.playAnimation(this.IMAGES_WALKING);
+                } else {
+                    this.playAnimation(this.IMAGES_DEAD);
+                }
+                lastAnimFrame = timestamp;
+            }
+            requestAnimationFrame(loop);
+        };
+        requestAnimationFrame(loop);
     }
+
 }

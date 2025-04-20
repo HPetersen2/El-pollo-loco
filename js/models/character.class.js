@@ -98,29 +98,56 @@ class Character extends MovableObject {
      * This function animates the character. Running, jumping and sleeping.
      */
     animate() {
-        setInterval(() => {
-            this.walking_sound.pause();
-            if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.dead) {this.walkRight()};
-            if(this.world.keyboard.LEFT && this.x > 0 && !this.dead) {this.walkLeft()};
-            if(this.world.keyboard.SPACE && !this.isAboveGround() && !this.dead) {this.jump()};
-            this.world.camera_x = -this.x + 100;
-        }, 1000 / 60);
-        setInterval(() => {
-            if(this.sleep) {this.sleeps();}
-            else if(this.isDead(this.energy)) {this.die();}
-            else if(this.isHurt()) {this.playAnimation(this.IMAGES_HURT);}
-            else if(this.isAboveGround()) {this.playAnimation(this.IMAGES_JUMPING);} else {
-                if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT && !this.world.keyboard.SPACE) {this.playAnimation(this.IMAGES_WALKING);}
+        let lastAnimationFrame = 0;
+        let lastLogicFrame = 0;
+        const loop = (timestamp) => {
+            if (timestamp - lastLogicFrame > 1000 / 60) {
+                this.walking_sound.pause();
+                if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.dead) {
+                    this.walkRight();
+                }
+                if (this.world.keyboard.LEFT && this.x > 0 && !this.dead) {
+                    this.walkLeft();
+                }
+                if (this.world.keyboard.SPACE && !this.isAboveGround() && !this.dead) {
+                    this.jump();
+                }
+                this.world.camera_x = -this.x + 100;
+                lastLogicFrame = timestamp;
             }
-        }, 60);
+            if (timestamp - lastAnimationFrame > 100) {
+                if (this.sleep) {
+                    this.sleeps();
+                } else if (this.isDead(this.energy)) {
+                    this.die();
+                } else if (this.isHurt()) {
+                    this.playAnimation(this.IMAGES_HURT);
+                } else if (this.isAboveGround()) {
+                    this.playAnimation(this.IMAGES_JUMPING);
+                } else {
+                    if ((this.world.keyboard.RIGHT || this.world.keyboard.LEFT) && !this.world.keyboard.SPACE) {
+                        this.playAnimation(this.IMAGES_WALKING);
+                    }
+                }
+                lastAnimationFrame = timestamp;
+            }
+            requestAnimationFrame(loop);
+        };
+        requestAnimationFrame(loop);
     }
 
     defaultAnimate() {
-        setInterval(() => {
-            if (!this.dead && !this.sleep && !this.isAboveGround() && this.x == this.currentX) {
-                this.playAnimation(this.IMAGES_IDLE);
+        let lastIdleFrame = 0;
+        const loop = (timestamp) => {
+            if (timestamp - lastIdleFrame > 60) {
+                if (!this.dead && !this.sleep && !this.isAboveGround() && this.x == this.currentX) {
+                    this.playAnimation(this.IMAGES_IDLE);
+                }
+                lastIdleFrame = timestamp;
             }
-        }, 60);
+            requestAnimationFrame(loop);
+        };
+        requestAnimationFrame(loop);
     }
 
     /**
